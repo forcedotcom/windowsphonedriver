@@ -1,0 +1,67 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsPhoneDriverBrowser", "src\WindowsPhoneDriverBrowser\WindowsPhoneDriverBrowser.csproj", "{AB7D38A7-423E-4511-99C8-533EFFFF3A7F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApp", "src\TestApp\TestApp.csproj", "{42321E8E-9749-4609-B494-3798F4CC4075}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsPhoneDriverServer", "src\WindowsPhoneDriverServer\WindowsPhoneDriverServer.csproj", "{ECCD288E-A6F5-427F-A1BC-CABBD4E885E9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsPhoneDriver", "src\WindowsPhoneDriver\WindowsPhoneDriver.csproj", "{07E21C43-C7F1-4D30-A27B-BF529F91E5AE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|ARM = Debug|ARM
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|ARM = Release|ARM
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AB7D38A7-423E-4511-99C8-533EFFFF3A7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB7D38A7-423E-4511-99C8-533EFFFF3A7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB7D38A7-423E-4511-99C8-533EFFFF3A7F}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{AB7D38A7-423E-4511-99C8-533EFFFF3A7F}.Debug|ARM.ActiveCfg = Debug|ARM
+		{AB7D38A7-423E-4511-99C8-533EFFFF3A7F}.Debug|ARM.Build.0 = Debug|ARM
+		{AB7D38A7-423E-4511-99C8-533EFFFF3A7F}.Debug|ARM.Deploy.0 = Debug|ARM
+		{AB7D38A7-423E-4511-99C8-533EFFFF3A7F}.Debug|x86.ActiveCfg = Debug|x86
+		{AB7D38A7-423E-4511-99C8-533EFFFF3A7F}.Debug|x86.Build.0 = Debug|x86
+		{AB7D38A7-423E-4511-99C8-533EFFFF3A7F}.Debug|x86.Deploy.0 = Debug|x86
+		{AB7D38A7-423E-4511-99C8-533EFFFF3A7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB7D38A7-423E-4511-99C8-533EFFFF3A7F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB7D38A7-423E-4511-99C8-533EFFFF3A7F}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{AB7D38A7-423E-4511-99C8-533EFFFF3A7F}.Release|ARM.ActiveCfg = Release|ARM
+		{AB7D38A7-423E-4511-99C8-533EFFFF3A7F}.Release|ARM.Build.0 = Release|ARM
+		{AB7D38A7-423E-4511-99C8-533EFFFF3A7F}.Release|ARM.Deploy.0 = Release|ARM
+		{AB7D38A7-423E-4511-99C8-533EFFFF3A7F}.Release|x86.ActiveCfg = Release|x86
+		{AB7D38A7-423E-4511-99C8-533EFFFF3A7F}.Release|x86.Build.0 = Release|x86
+		{AB7D38A7-423E-4511-99C8-533EFFFF3A7F}.Release|x86.Deploy.0 = Release|x86
+		{42321E8E-9749-4609-B494-3798F4CC4075}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42321E8E-9749-4609-B494-3798F4CC4075}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42321E8E-9749-4609-B494-3798F4CC4075}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{42321E8E-9749-4609-B494-3798F4CC4075}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{42321E8E-9749-4609-B494-3798F4CC4075}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42321E8E-9749-4609-B494-3798F4CC4075}.Release|ARM.ActiveCfg = Release|Any CPU
+		{42321E8E-9749-4609-B494-3798F4CC4075}.Release|x86.ActiveCfg = Release|Any CPU
+		{ECCD288E-A6F5-427F-A1BC-CABBD4E885E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECCD288E-A6F5-427F-A1BC-CABBD4E885E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECCD288E-A6F5-427F-A1BC-CABBD4E885E9}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{ECCD288E-A6F5-427F-A1BC-CABBD4E885E9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{ECCD288E-A6F5-427F-A1BC-CABBD4E885E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECCD288E-A6F5-427F-A1BC-CABBD4E885E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ECCD288E-A6F5-427F-A1BC-CABBD4E885E9}.Release|ARM.ActiveCfg = Release|Any CPU
+		{ECCD288E-A6F5-427F-A1BC-CABBD4E885E9}.Release|x86.ActiveCfg = Release|Any CPU
+		{07E21C43-C7F1-4D30-A27B-BF529F91E5AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07E21C43-C7F1-4D30-A27B-BF529F91E5AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07E21C43-C7F1-4D30-A27B-BF529F91E5AE}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{07E21C43-C7F1-4D30-A27B-BF529F91E5AE}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{07E21C43-C7F1-4D30-A27B-BF529F91E5AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07E21C43-C7F1-4D30-A27B-BF529F91E5AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07E21C43-C7F1-4D30-A27B-BF529F91E5AE}.Release|ARM.ActiveCfg = Release|Any CPU
+		{07E21C43-C7F1-4D30-A27B-BF529F91E5AE}.Release|x86.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

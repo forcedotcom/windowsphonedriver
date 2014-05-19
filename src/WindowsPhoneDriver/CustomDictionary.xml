@@ -1,0 +1,9 @@
+﻿<Dictionary>
+  <Words>
+    <Recognized>
+      <Word>OnClientConnection</Word>
+      <Word>SocketException</Word>
+      <Word>HttpListenerException</Word>
+    </Recognized>
+  </Words>
+</Dictionary>

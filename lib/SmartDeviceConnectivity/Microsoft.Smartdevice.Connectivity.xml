@@ -1,0 +1,854 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <assembly>
+    <name>Microsoft.SmartDevice.Connectivity</name>
+  </assembly>
+  <members>
+    <member name="T:Microsoft.SmartDevice.Connectivity.DatastoreException">
+      <summary>Thrown when there is a problem related to the Datastore.</summary>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.DatastoreException.#ctor">
+      <summary>Creates a new instance of the object and does not call the base constructor.</summary>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.DatastoreException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+      <summary>Creates a new instance of the object and sets <see cref="T:System.Runtime.Serialization.SerializationInfo" /> with information about the exception. </summary>
+      <param name="info">Contains contextual information about the source or destination.</param>
+      <param name="context">Holds the serialized object data about the thrown exception.</param>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.DatastoreException.#ctor(System.String)">
+      <summary>Creates a new instance of the object and passes arguments to the base class constructor.</summary>
+      <param name="message">The message that describes the error.</param>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.DatastoreException.#ctor(System.String,System.Exception)">
+      <summary>Creates a new instance of the object and passes arguments to the base class constructor.</summary>
+      <param name="message">The message that describes the error.</param>
+      <param name="innerException">The exception that is the cause of the current exception, or a null reference if no inner exception is specified. </param>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.DatastoreException.#ctor(System.String,System.Int32)">
+      <summary>Creates a new instance of the object and passes arguments to the base class constructor.</summary>
+      <param name="message">The message that describes the error.</param>
+      <param name="hresult">The coded numerical value that represents the type of exception or error.</param>
+    </member>
+    <member name="T:Microsoft.SmartDevice.Connectivity.DatastoreManager">
+      <summary>Accesses information in the Datastore and provides methods to enumerate and get <see cref="T:Microsoft.SmartDevice.Connectivity.Platform" /> objects in the desktop computer's Datastore.</summary>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.DatastoreManager.#ctor(System.Int32)">
+      <summary>Returns a singleton static <see cref="T:Microsoft.SmartDevice.Connectivity.DatastoreManager" /> object.</summary>
+      <param name="localeId">A locale identifier (LCID), an integer that identifies the language, country, and/or region.</param>
+      <exception cref="T:Microsoft.SmartDevice.Connectivity.DatastoreException">COM exceptions are caught and are thrown again as <see cref="T:Microsoft.SmartDevice.Connectivity.DatastoreException" /> objects.</exception>
+    </member>
+    <member name="E:Microsoft.SmartDevice.Connectivity.DatastoreManager.DatastoreRefreshEvent">
+      <summary>Occurs when the Datastore is changed.</summary>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.DatastoreManager.GetPlatform(Microsoft.SmartDevice.Connectivity.ObjectId)">
+      <summary>Gets a platform object that corresponds to the specified platform ID.</summary>
+      <returns>The platform with the specified platform ID.</returns>
+      <param name="platformId">An <see cref="T:Microsoft.SmartDevice.Connectivity.ObjectId" /> that represents the unique platform ID.</param>
+      <exception cref="T:System.ArgumentNullException">The input string is null.</exception>
+      <exception cref="T:Microsoft.SmartDevice.Connectivity.PlatformNotFoundException">The given platform is not found in the list of platforms registered with the Datastore.</exception>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.DatastoreManager.GetPlatforms">
+      <summary>Gets a collection of all platforms registered with the Datastore.</summary>
+      <returns>A <see cref="T:System.Collections.ObjectModel.Collection`1" /> of all platforms.</returns>
+    </member>
+    <member name="P:Microsoft.SmartDevice.Connectivity.DatastoreManager.LocaleId">
+      <summary>Gets or sets the locale identifier (LCID), an integer that identifies the language, country, and/or region.</summary>
+      <returns>The locale identifier (LCID).</returns>
+      <exception cref="T:Microsoft.SmartDevice.Connectivity.DatastoreException">COM exceptions are caught and are thrown again as <see cref="T:Microsoft.SmartDevice.Connectivity.DatastoreException" /> objects.</exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">Thrown if assigned to a value less than zero.</exception>
+    </member>
+    <member name="T:Microsoft.SmartDevice.Connectivity.DataType">
+      <summary>Indicates the type of object in the <see cref="T:Microsoft.SmartDevice.Connectivity.Packet" />.</summary>
+    </member>
+    <member name="F:Microsoft.SmartDevice.Connectivity.DataType.InvalidType">
+      <summary>Invalid data type or end of packet (EOP). Usually means you have reached the end of packet and there is no more data.</summary>
+    </member>
+    <member name="F:Microsoft.SmartDevice.Connectivity.DataType.ByteType">
+      <summary>The next byte in packet is of type <see cref="T:System.Byte" />.</summary>
+    </member>
+    <member name="F:Microsoft.SmartDevice.Connectivity.DataType.Int32Type">
+      <summary>The next byte in packet is of type <see cref="T:System.Int32" />.</summary>
+    </member>
+    <member name="F:Microsoft.SmartDevice.Connectivity.DataType.CharType">
+      <summary>The next byte in packet is of type <see cref="T:System.Char" />.</summary>
+    </member>
+    <member name="F:Microsoft.SmartDevice.Connectivity.DataType.BoolType">
+      <summary>The next byte in packet is of type <see cref="T:System.Boolean" />.</summary>
+    </member>
+    <member name="F:Microsoft.SmartDevice.Connectivity.DataType.ByteArrayType">
+      <summary>The next byte in packet is of type <see cref="T:System.Byte" /> [].</summary>
+    </member>
+    <member name="F:Microsoft.SmartDevice.Connectivity.DataType.StringType">
+      <summary>The next byte in packet is of type <see cref="T:System.String" />.</summary>
+    </member>
+    <member name="T:Microsoft.SmartDevice.Connectivity.Device">
+      <summary>Represents a device or emulator that is based on Windows Embedded CE and provides methods to provision, get information, and connect to a device.</summary>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.Device.Connect">
+      <summary>Establishes a connection to the current device or emulator.</summary>
+      <exception cref="T:Microsoft.SmartDevice.Connectivity.SmartDeviceException">The connection to device or emulator failed.</exception>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.Device.Disconnect">
+      <summary>Disconnects the existing connection to a device or emulator. </summary>
+      <exception cref="T:Microsoft.SmartDevice.Connectivity.SmartDeviceException">The attempt to disconnect a device or emulator did not return success.</exception>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.Device.Equals(System.Object)">
+      <summary>Checks if the current object and the specified object are the same.</summary>
+      <returns>True if the devices have the same <see cref="P:Microsoft.SmartDevice.Connectivity.Device.Id" /> values; otherwise false.</returns>
+      <param name="obj">The device object to be compared.</param>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.Device.GetFileDeployer">
+      <summary>Returns a <see cref="T:Microsoft.SmartDevice.Connectivity.FileDeployer" /> object that is used to copy files between the device and desktop computer.</summary>
+      <returns>An object of type <see cref="T:Microsoft.SmartDevice.Connectivity.FileDeployer" />.</returns>
+      <exception cref="T:Microsoft.SmartDevice.Connectivity.DeviceNotConnectedException">The device is not connected.</exception>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.Device.GetHashCode">
+      <summary>Returns the hash code of this object.</summary>
+      <returns>
+        <see cref="T:System.Int32" /> hash code.</returns>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.Device.GetProperty(System.String)">
+      <summary>Returns the value of a device property when given the name of the property.</summary>
+      <returns>The value of the property.</returns>
+      <param name="propertyName">One of the following property names:OS_Version - Version of the device's operating system</param>
+      <exception cref="T:Microsoft.SmartDevice.Connectivity.PropertyNotFoundException">When the <paramref name="propertyName" /> argument is invalid.</exception>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.Device.GetRemoteAgent(Microsoft.SmartDevice.Connectivity.ObjectId)">
+      <summary>Returns a <see cref="T:Microsoft.SmartDevice.Connectivity.RemoteAgent" /> associated with the supplied package ID.</summary>
+      <returns>An object of type <see cref="T:Microsoft.SmartDevice.Connectivity.RemoteAgent" />. </returns>
+      <param name="packageId">The service ID of the remote agent object.</param>
+      <exception cref="T:Microsoft.SmartDevice.Connectivity.DeviceNotConnectedException">The device is not connected.</exception>
+      <exception cref="T:Microsoft.SmartDevice.Connectivity.SmartDeviceException">A COM exception is thrown by underlying COM components.</exception>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.Device.GetRemoteProcess">
+      <summary>Creates and returns an instance of <see cref="T:Microsoft.SmartDevice.Connectivity.RemoteProcess" /> that is used to start or end a process on the device.</summary>
+      <returns>Returns an object of type <see cref="T:Microsoft.SmartDevice.Connectivity.RemoteProcess" />.</returns>
+      <exception cref="T:Microsoft.SmartDevice.Connectivity.DeviceNotConnectedException">The device is not connected.</exception>
+      <exception cref="T:Microsoft.SmartDevice.Connectivity.SmartDeviceException">A COM exception is thrown by underlying COM components.</exception>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.Device.GetRunningProcesses">
+      <summary>Returns list of processes running on the device.</summary>
+      <returns>Returns a collection.</returns>
+      <exception cref="T:Microsoft.SmartDevice.Connectivity.DeviceNotConnectedException">The device is not connected.</exception>
+      <exception cref="T:Microsoft.SmartDevice.Connectivity.SmartDeviceException">A COM exception is thrown by underlying COM components.</exception>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.Device.GetSystemInfo">
+      <summary>Gets the system information of the device.</summary>
+      <returns>Returns a class of type <see cref="T:Microsoft.SmartDevice.Connectivity.SystemInfo" />.</returns>
+      <exception cref="T:Microsoft.SmartDevice.Connectivity.DeviceNotConnectedException">The device is not connected.</exception>
+      <exception cref="T:Microsoft.SmartDevice.Connectivity.SmartDeviceException">A COM exception occurred.</exception>
+    </member>
+    <member name="P:Microsoft.SmartDevice.Connectivity.Device.Id">
+      <summary>Gets the unique identifier of the current device.</summary>
+      <returns>The unique identifier of the current device.</returns>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.Device.IsConnected">
+      <summary>Checks whether the device is connected.</summary>
+      <returns>True if device is connected; otherwise, false.</returns>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.Device.IsEmulator">
+      <summary>Checks whether the device is an emulator or a physical device.</summary>
+      <returns>True if device object refers to an emulator; otherwise, false.</returns>
+    </member>
+    <member name="P:Microsoft.SmartDevice.Connectivity.Device.Name">
+      <summary>Gets a string that represents the device's name.</summary>
+      <returns>The name of the device.</returns>
+    </member>
+    <member name="P:Microsoft.SmartDevice.Connectivity.Device.Platform">
+      <summary>Gets the <see cref="T:Microsoft.SmartDevice.Connectivity.Platform" />, such as Windows Mobile 5.0 Pocket PC, that the device belongs to.</summary>
+      <returns>The <see cref="T:Microsoft.SmartDevice.Connectivity.Platform" /> the device belongs to.</returns>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.Device.ProvisionDevice(System.String,Microsoft.SmartDevice.Connectivity.Device.ConfigActions)">
+      <summary>Provisions the device by calling DMProcessConfigXML and passing the given XML string.</summary>
+      <returns>The return value is the XML configuration read from the smart device. The format follows the Microsoft MSPROV document type definition (DTD) format. For more information, see MSPROV DTD Format and Provisioning XML File Examples.</returns>
+      <param name="xml">The XML to be provisioned.</param>
+      <param name="action">The <see cref="T:Microsoft.SmartDevice.Connectivity.Device.ConfigActions" /> enumeration specifies whether the method should read XML from the device or apply XML to the device.</param>
+      <exception cref="T:Microsoft.SmartDevice.Connectivity.DeviceNotConnectedException">The device is not connected.</exception>
+      <exception cref="T:Microsoft.SmartDevice.Connectivity.SmartDeviceException">A COM exception is thrown by underlying COM components.</exception>
+      <exception cref="T:System.ArgumentNullException">The XML argument is NULL.</exception>
+      <exception cref="T:System.ArgumentException">The XML argument is invalid.</exception>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.Device.ToString">
+      <summary>Returns the name of the device.</summary>
+      <returns>The name of the device.</returns>
+    </member>
+    <member name="T:Microsoft.SmartDevice.Connectivity.Device.ConfigActions">
+      <summary>Specifies the action to take when provisioning a device.</summary>
+    </member>
+    <member name="F:Microsoft.SmartDevice.Connectivity.Device.ConfigActions.ProcessInput">
+      <summary>Provision XML configuration to the device. Used to deploy policies to the device and query current policy settings on the device.</summary>
+    </member>
+    <member name="F:Microsoft.SmartDevice.Connectivity.Device.ConfigActions.ReadMetadata">
+      <summary>Read metadata from the device.</summary>
+    </member>
+    <member name="T:Microsoft.SmartDevice.Connectivity.DeviceNotConnectedException">
+      <summary>Thrown in scenarios where the device is not connected.</summary>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.DeviceNotConnectedException.#ctor">
+      <summary>Creates a new instance of the object and does not call the base constructor.</summary>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.DeviceNotConnectedException.#ctor(System.Runtime.InteropServices.COMException)">
+      <summary>Creates a new instance of the object and passes arguments to the base class constructor.</summary>
+      <param name="ex">The COM exception.</param>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.DeviceNotConnectedException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+      <summary>Creates a new instance of the object and sets <see cref="T:System.Runtime.Serialization.SerializationInfo" /> with information about the exception. </summary>
+      <param name="info">Contains contextual information about the source or destination.</param>
+      <param name="context">Holds the serialized object data about the exception being thrown.</param>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.DeviceNotConnectedException.#ctor(System.String)">
+      <summary>Creates a new instance of the object and passes arguments to the base class constructor.</summary>
+      <param name="message">The message that describes the error.</param>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.DeviceNotConnectedException.#ctor(System.String,System.Exception)">
+      <summary>Creates a new instance of the object and passes arguments to the base class constructor.</summary>
+      <param name="message">The message that describes the error.</param>
+      <param name="innerException">The exception that is the cause of the current exception, or a null reference if no inner exception is specified.</param>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.DeviceNotConnectedException.#ctor(System.String,System.Int32)">
+      <summary>Creates a new instance of the object and passes arguments to the base class constructor.</summary>
+      <param name="message">The message that describes the error.</param>
+      <param name="hresult">The coded numerical value that represents the type of exception or error.</param>
+    </member>
+    <member name="T:Microsoft.SmartDevice.Connectivity.DeviceNotFoundException">
+      <summary>Represents all exceptions in scenarios where the device is not found. </summary>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.DeviceNotFoundException.#ctor">
+      <summary>Creates a new instance of the object and does not call the base constructor.</summary>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.DeviceNotFoundException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+      <summary>Creates a new instance of the object and sets <see cref="T:System.Runtime.Serialization.SerializationInfo" /> with information about the exception. </summary>
+      <param name="info">Contains contextual information about the source or destination.</param>
+      <param name="context">Holds the serialized object data about the thrown exception.</param>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.DeviceNotFoundException.#ctor(System.String)">
+      <summary>Creates a new instance of the object and passes arguments to the base class constructor.</summary>
+      <param name="message">The message that describes the error.</param>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.DeviceNotFoundException.#ctor(System.String,System.Exception)">
+      <summary>Creates a new instance of the object and passes arguments to the base class constructor.</summary>
+      <param name="message">The message that describes the error.</param>
+      <param name="innerException">The exception that is the cause of the current exception, or a null reference if no inner exception is specified.</param>
+    </member>
+    <member name="T:Microsoft.SmartDevice.Connectivity.DevicePacketStream">
+      <summary>Exchanges data between a desktop application and a device agent application by reading and writing objects of type <see cref="T:Microsoft.SmartDevice.Connectivity.Packet" />.</summary>
+    </member>
+    <member name="P:Microsoft.SmartDevice.Connectivity.DevicePacketStream.Buffering">
+      <summary>Enables or disables Nagle's buffering algorithm on the stream. </summary>
+      <returns>Returns true for enabled, false for disabled.</returns>
+      <exception cref="T:System.IO.IOException">An exception is thrown by the underlying COM layer. Only occurs on set operation.</exception>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.DevicePacketStream.Close">
+      <summary>Disconnects the stream connection between the device and the host </summary>
+      <exception cref="T:System.IO.IOException">An exception occurs in underlying unmanaged components.</exception>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.DevicePacketStream.IsConnected">
+      <summary>Checks if packet stream is connected.</summary>
+      <returns>true if stream is connected; otherwise, false.</returns>
+      <exception cref="T:System.IO.IOException">A COM or IO exception has occurred.</exception>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.DevicePacketStream.IsPacketAvailable">
+      <summary>Checks if a packet is available to be read from the device packet stream.</summary>
+      <returns>true if there is data ready to be read; otherwise, false.</returns>
+      <exception cref="T:System.IO.IOException">A COM or IO exception has occurred.</exception>
+    </member>
+    <member name="P:Microsoft.SmartDevice.Connectivity.DevicePacketStream.MaxPacketSize">
+      <summary>Gets the maximum packet size limited by the underlying transport mechanism.</summary>
+      <returns>This method returns the limit of the packet size in number of bytes.</returns>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.DevicePacketStream.Read">
+      <summary>Reads data from the device and returns a packet object. </summary>
+      <returns>Packet object that contains data transferred over the device packet stream.</returns>
+      <exception cref="T:System.IO.IOException">Occurs if an exception occurs when reading a packet. or if data that arrived on the stream is not a valid packet object.</exception>
+      <exception cref="T:System.Runtime.Serialization.SerializationException">The packet was corrupted during transmission over the network.</exception>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.DevicePacketStream.Write(Microsoft.SmartDevice.Connectivity.Packet)">
+      <summary>Writes a <see cref="T:Microsoft.SmartDevice.Connectivity.Packet" /> object to a device packet stream.</summary>
+      <param name="packet">The packet object to be written to the stream.</param>
+      <exception cref="T:System.IO.IOException">A COM or IO exception has occurred.</exception>
+      <exception cref="T:System.ArgumentNullException">The packet has no data.</exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">The packet size after serialization exceeds the maximum size specified by the device packet stream object.</exception>
+    </member>
+    <member name="T:Microsoft.SmartDevice.Connectivity.FileDeployer">
+      <summary>Used to transfer files between the smart device and the desktop computer.</summary>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.FileDeployer.DownloadPackage(Microsoft.SmartDevice.Connectivity.ObjectId)">
+      <summary>Downloads a package to the device based on the given package ID corresponding to a specific CPU. </summary>
+      <param name="packageId">Unique package ID.</param>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.FileDeployer.ReceiveFile(System.String,System.String)">
+      <summary>Copies a file from the device to the desktop computer.</summary>
+      <param name="sourceDeviceFileName">Source file name on the smart device.</param>
+      <param name="destinationDesktopFileName">Destination file name on the development computer.</param>
+      <exception cref="T:System.ArgumentException">One or more arguments are invalid.</exception>
+      <exception cref="T:System.ArgumentNullException">One or more arguments are null.</exception>
+      <exception cref="T:Microsoft.SmartDevice.Connectivity.SmartDeviceException">A COM exception occurred in underlying COM components.</exception>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.FileDeployer.ReceiveFile(System.String,System.String,System.Boolean)">
+      <summary>Copies a file from the device to the desktop computer together with an additional parameter to prevent automatic overwriting of existing files.</summary>
+      <param name="sourceDeviceFileName">Source file name on the smart device.</param>
+      <param name="destinationDesktopFileName">Destination file name on the development computer.</param>
+      <param name="overwrite">Flag to overwrite a file by using the same name on the device.</param>
+      <exception cref="T:System.ArgumentNullException">One or more arguments are null.</exception>
+      <exception cref="T:System.ArgumentException">One or more of the arguments are invalid.</exception>
+      <exception cref="T:Microsoft.SmartDevice.Connectivity.SmartDeviceException">A COM exception occurred in underlying COM components. This exception can be thrown when the file already exists or when access to the file system is denied.</exception>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.FileDeployer.SendFile(System.String,System.String)">
+      <summary>Copies a file to the connected device and overwrites it if the file already exists on the device.</summary>
+      <param name="sourceDesktopFileName">Source file name on the development computer.</param>
+      <param name="destinationDeviceFileName">Destination file name on the smart device.</param>
+      <exception cref="T:System.ArgumentNullException">One or more arguments are null.</exception>
+      <exception cref="T:System.ArgumentException">One or more arguments are invalid.</exception>
+      <exception cref="T:Microsoft.SmartDevice.Connectivity.SmartDeviceException">A COM exception occurred in underlying COM components.</exception>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.FileDeployer.SendFile(System.String,System.String,System.Boolean,System.Boolean)">
+      <summary>Copies a file to the connected device with additional parameters for automatically overwriting files and registering COM binaries. </summary>
+      <param name="sourceDesktopFileName">Source file name on the development computer.</param>
+      <param name="destinationDeviceFileName">Destination file name on the smart device.</param>
+      <param name="overwrite">Flag to overwrite a file by using the same name on the device.</param>
+      <param name="register">Flag to register the COM binary after copying the file to the device.</param>
+      <exception cref="T:System.ArgumentNullException">One or more arguments are null.</exception>
+      <exception cref="T:System.ArgumentException">One or more arguments are invalid.</exception>
+      <exception cref="T:Microsoft.SmartDevice.Connectivity.SmartDeviceException">A COM exception occurred in underlying COM components.</exception>
+    </member>
+    <member name="T:Microsoft.SmartDevice.Connectivity.InstructionSetType">
+      <summary>Indicates the instruction set type of the device's CPU. </summary>
+    </member>
+    <member name="F:Microsoft.SmartDevice.Connectivity.InstructionSetType.Unknown">
+      <summary>Unknown CPU instruction set type.</summary>
+    </member>
+    <member name="F:Microsoft.SmartDevice.Connectivity.InstructionSetType.Armv4">
+      <summary>Armv4 CPU instruction set type.</summary>
+    </member>
+    <member name="F:Microsoft.SmartDevice.Connectivity.InstructionSetType.Armv4fp">
+      <summary>ARMV4FP CPU instruction set type.</summary>
+    </member>
+    <member name="F:Microsoft.SmartDevice.Connectivity.InstructionSetType.Armv4i">
+      <summary>ARMV4I CPU instruction set type.</summary>
+    </member>
+    <member name="F:Microsoft.SmartDevice.Connectivity.InstructionSetType.Armv4ifp">
+      <summary>ARMV4IFP CPU instruction set type.</summary>
+    </member>
+    <member name="F:Microsoft.SmartDevice.Connectivity.InstructionSetType.Armv4t">
+      <summary>ARMVT CPU instruction set type.</summary>
+    </member>
+    <member name="F:Microsoft.SmartDevice.Connectivity.InstructionSetType.Armv4tfp">
+      <summary>ARMVTFP CPU instruction set type.</summary>
+    </member>
+    <member name="F:Microsoft.SmartDevice.Connectivity.InstructionSetType.Sh4">
+      <summary>SH4 CPU instruction set type.</summary>
+    </member>
+    <member name="F:Microsoft.SmartDevice.Connectivity.InstructionSetType.MipsII">
+      <summary>MIPSII CPU instruction set type.</summary>
+    </member>
+    <member name="F:Microsoft.SmartDevice.Connectivity.InstructionSetType.MipsIIfp">
+      <summary>MIPSIIFP CPU instruction set type.</summary>
+    </member>
+    <member name="F:Microsoft.SmartDevice.Connectivity.InstructionSetType.MipsIV">
+      <summary>MIPSIV CPU instruction set type.</summary>
+    </member>
+    <member name="F:Microsoft.SmartDevice.Connectivity.InstructionSetType.MipsIVfp">
+      <summary>MIPSIVFP CPU instruction set type.</summary>
+    </member>
+    <member name="F:Microsoft.SmartDevice.Connectivity.InstructionSetType.X86">
+      <summary>X86 CPU instruction set type.</summary>
+    </member>
+    <member name="T:Microsoft.SmartDevice.Connectivity.ObjectId">
+      <summary>Encapsulates the unique ID required for various classes of this assembly.</summary>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.ObjectId.#ctor(Microsoft.SmartDevice.Connectivity.ObjectId)">
+      <summary>Creates a new instance of the object which is a copy of the argument.</summary>
+      <param name="objId">A valid <see cref="T:Microsoft.SmartDevice.Connectivity.ObjectId" />.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="id" /> is null. </exception>
+      <exception cref="T:System.ArgumentException">Length of <paramref name="id" /> is zero. </exception>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.ObjectId.#ctor(System.Guid)">
+      <summary>Creates a new instance of the object and sets the object's ID to the supplied GUID.</summary>
+      <param name="guid">A valid ID value.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="id" /> is null. </exception>
+      <exception cref="T:System.ArgumentException">Length of <paramref name="id" /> is zero. </exception>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.ObjectId.#ctor(System.String)">
+      <summary>Creates a new instance of the object and sets the object's ID to the supplied string.</summary>
+      <param name="id">A valid string.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="id" /> is null. </exception>
+      <exception cref="T:System.ArgumentException">Length of <paramref name="id" /> is zero. </exception>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.ObjectId.Equals(System.Object)">
+      <summary>Determines whether this instance and the supplied object are equal.</summary>
+      <returns>true if <paramref name="obj" /> and this object are the same; otherwise, false.</returns>
+      <param name="obj">An <see cref="T:Microsoft.SmartDevice.Connectivity.ObjectId" />.</param>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.ObjectId.Equals(System.Object,System.Object)">
+      <summary>Determines whether the two arguments are equal.</summary>
+      <returns>true if <paramref name="objA" /> is equal to <paramref name="objB" />; otherwise, false. </returns>
+      <param name="objA">An <see cref="T:Microsoft.SmartDevice.Connectivity.ObjectId" /> object.</param>
+      <param name="objB">An <see cref="T:Microsoft.SmartDevice.Connectivity.ObjectId" /> object.</param>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.ObjectId.GetHashCode">
+      <summary>Returns a hash code of the object.</summary>
+      <returns>Int32 hash code.</returns>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.ObjectId.op_Equality(Microsoft.SmartDevice.Connectivity.ObjectId,Microsoft.SmartDevice.Connectivity.ObjectId)">
+      <summary>Determines whether two objects are equal.</summary>
+      <returns>true if equal; otherwise, false.</returns>
+      <param name="objA">An <see cref="T:Microsoft.SmartDevice.Connectivity.ObjectId" /> object.</param>
+      <param name="objB">An <see cref="T:Microsoft.SmartDevice.Connectivity.ObjectId" /> object.</param>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.ObjectId.op_Equality(Microsoft.SmartDevice.Connectivity.ObjectId,System.String)">
+      <summary>Determines whether the object's internal ID is equal to the supplied string.</summary>
+      <returns>true if equal; otherwise, false.</returns>
+      <param name="objId">An <see cref="T:Microsoft.SmartDevice.Connectivity.ObjectId" /> object.</param>
+      <param name="strId">A valid string.</param>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.ObjectId.op_Inequality(Microsoft.SmartDevice.Connectivity.ObjectId,Microsoft.SmartDevice.Connectivity.ObjectId)">
+      <summary>Determines whether two objects are not equal.</summary>
+      <returns>true if not equal; otherwise, false.</returns>
+      <param name="objA">An <see cref="T:Microsoft.SmartDevice.Connectivity.ObjectId" /> object.</param>
+      <param name="objB">An <see cref="T:Microsoft.SmartDevice.Connectivity.ObjectId" /> object.</param>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.ObjectId.op_Inequality(Microsoft.SmartDevice.Connectivity.ObjectId,System.String)">
+      <summary>Determines whether the object's internal ID is not equal to the supplied string.</summary>
+      <returns>true if not equal; otherwise, false.</returns>
+      <param name="objId">An <see cref="T:Microsoft.SmartDevice.Connectivity.ObjectId" /> object.</param>
+      <param name="strId">A valid string.</param>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.ObjectId.ToString">
+      <summary>Returns the object's internal ID value as a string.</summary>
+      <returns>A string that represents the object's ID value.</returns>
+    </member>
+    <member name="T:Microsoft.SmartDevice.Connectivity.Packet">
+      <summary>Holds data and is used by the <see cref="T:Microsoft.SmartDevice.Connectivity.DevicePacketStream" /> class to transfer data between a smart device and a desktop computer. </summary>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.Packet.#ctor">
+      <summary>Creates an empty packet.</summary>
+    </member>
+    <member name="P:Microsoft.SmartDevice.Connectivity.Packet.Count">
+      <summary>Gets the total number of data objects in the packet.</summary>
+      <returns>The total number of data objects in the packet.</returns>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.Packet.IsEndOfPacket">
+      <summary>Checks if the internal iterator has reached the end of the packet. </summary>
+      <returns>true if end of packet has been reached. false if there are still packets left.</returns>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.Packet.ReadBool">
+      <summary>Reads a Boolean value from the <see cref="T:Microsoft.SmartDevice.Connectivity.Packet" /> object and points the internal iterator to the next data object in the packet.</summary>
+      <returns>The Boolean value read from the packet.</returns>
+      <exception cref="T:System.InvalidOperationException">Thrown when one or more of the following conditions are true:The packet's current data object is not of type <see cref="T:System.Boolean" />.A read operation is tried after reaching end of packet.</exception>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.Packet.ReadByte">
+      <summary>Reads a byte from the <see cref="T:Microsoft.SmartDevice.Connectivity.Packet" /> object and points the internal iterator to the next data object in the packet.</summary>
+      <returns>The byte read from the packet.</returns>
+      <exception cref="T:System.InvalidOperationException">Thrown when one or more of the following conditions are true:The packet's current data object is not of type <see cref="T:System.Byte" />.A read operation is tried after reaching end of packet.</exception>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.Packet.ReadBytes">
+      <summary>Reads an array of bytes from the <see cref="T:Microsoft.SmartDevice.Connectivity.Packet" /> object and points the internal iterator to the next data object in the packet.</summary>
+      <returns>The array of bytes read from the packet.</returns>
+      <exception cref="T:System.InvalidOperationException">Thrown when one or more of the following conditions are true:The packet's current data object is not of type <see cref="T:System.Byte" />[].A read operation is tried after reaching end of packet.</exception>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.Packet.ReadChar">
+      <summary>Reads a character from the <see cref="T:Microsoft.SmartDevice.Connectivity.Packet" /> object and points the internal iterator to the next data object in the packet.</summary>
+      <returns>The character read from the packet.</returns>
+      <exception cref="T:System.InvalidOperationException">Thrown when one or more of the following conditions are true:A read operation is tried after reaching end of packet (EOP).The packet's current data object is not of type <see cref="T:System.Char" />.</exception>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.Packet.ReadDataType">
+      <summary>Returns the data type of the current object in the packet as a <see cref="T:Microsoft.SmartDevice.Connectivity.DataType" /> enumeration value. </summary>
+      <returns>Returns the Datatype of the current data object in the packet.</returns>
+      <exception cref="T:System.InvalidOperationException">Thrown when a read operation is tried after reaching end of packet.</exception>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.Packet.ReadInt32">
+      <summary>Reads an integer from the <see cref="T:Microsoft.SmartDevice.Connectivity.Packet" /> object and points the internal iterator to the next data object in the packet.</summary>
+      <returns>The integer read from the packet.</returns>
+      <exception cref="T:System.InvalidOperationException">Thrown when one or more of the following conditions are true:The packet's current data object is not of type <see cref="T:System.Int32" />.A read operation is tried after reaching end of packet.</exception>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.Packet.ReadString">
+      <summary>Reads a string from the <see cref="T:Microsoft.SmartDevice.Connectivity.Packet" /> object and points the internal iterator to the next data object in the packet.</summary>
+      <returns>The string read from the packet.</returns>
+      <exception cref="T:System.InvalidOperationException">Thrown when one or more of the following conditions are true:The packet's current data object is not of type <see cref="T:System.String" />.A read operation is tried after reaching end of packet.</exception>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.Packet.Reset">
+      <summary>Resets the packet's internal iterator to point to the first data object in the packet. The next read operation reads the first data object in the packet.</summary>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.Packet.WriteBool(System.Boolean)">
+      <summary>Writes a Boolean value to the <see cref="T:Microsoft.SmartDevice.Connectivity.Packet" /> object.</summary>
+      <param name="value">The Boolean value to be written to the packet.</param>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.Packet.WriteByte(System.Byte)">
+      <summary>Writes a byte to the <see cref="T:Microsoft.SmartDevice.Connectivity.Packet" /> object.</summary>
+      <param name="value">The byte to be written to the packet </param>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.Packet.WriteBytes(System.Byte[])">
+      <summary>Writes an array of bytes to the <see cref="T:Microsoft.SmartDevice.Connectivity.Packet" /> object.</summary>
+      <param name="value">The array of bytes to be written to the packet.</param>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.Packet.WriteChar(System.Char)">
+      <summary>Writes a character to the <see cref="T:Microsoft.SmartDevice.Connectivity.Packet" /> object.</summary>
+      <param name="value">The character to be written to the packet. </param>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.Packet.WriteInt32(System.Int32)">
+      <summary>Writes an integer to the <see cref="T:Microsoft.SmartDevice.Connectivity.Packet" /> object.</summary>
+      <param name="value">The integer to be written into the packet. </param>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.Packet.WriteString(System.String)">
+      <summary>Writes a string to the <see cref="T:Microsoft.SmartDevice.Connectivity.Packet" /> object.</summary>
+      <param name="value">The string to be written to the packet. </param>
+    </member>
+    <member name="T:Microsoft.SmartDevice.Connectivity.Platform">
+      <summary>Represents a Windows CE based platform, such as Windows Mobile 5.0 Pocket PC, that is registered in the Datastore.</summary>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.Platform.Equals(System.Object)">
+      <summary>Returns true if the ID of this object is the same as the ID of the argument.</summary>
+      <returns>Returns true if IDs are the same; otherwise, false.</returns>
+      <param name="obj">An object of type <see cref="T:Microsoft.SmartDevice.Connectivity.Platform" />.</param>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.Platform.GetDefaultDeviceId">
+      <summary>Gets the ID of the default device associated with this platform.</summary>
+      <returns>ObjectId of the default device.</returns>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.Platform.GetDevice(Microsoft.SmartDevice.Connectivity.ObjectId)">
+      <summary>Gets a <see cref="T:Microsoft.SmartDevice.Connectivity.Device" /> given its ID.</summary>
+      <returns>A device object that represents the device.</returns>
+      <param name="deviceId">An object that represents the device's ID.</param>
+      <exception cref="T:System.ArgumentNullException">When input argument is a null string.</exception>
+      <exception cref="T:Microsoft.SmartDevice.Connectivity.DeviceNotFoundException">When a device with the given device ID is not found.</exception>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.Platform.GetDevices">
+      <summary>Gets the collection of all devices associated with this platform.</summary>
+      <returns>Returns a collection of devices associated with the platform.</returns>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.Platform.GetHashCode">
+      <summary>Gets the hash code of the platform instance.</summary>
+      <returns>Returns the hash code of the platform instance.</returns>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.Platform.GetOSVersion">
+      <summary>Returns a <see cref="T:System.Version" /> object together with version information about the platform's operating system.</summary>
+      <returns>Returns a <see cref="T:System.Version" /> object together with version information about the platform's operating system.</returns>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.Platform.GetProperty(System.String)">
+      <summary>Returns the value of a platform property given the name of the property.</summary>
+      <returns>The value of the property.</returns>
+      <param name="propertyName">One of the following property names:OSVersion - Operating system version of the platform.DefaultPlatform - Default platform ID.DefaultDevice - Default device associated with this platform.ShortName - Short name of the platform.DefaultFormFactor - Default form factor of this platform.</param>
+      <exception cref="T:Microsoft.SmartDevice.Connectivity.PropertyNotFoundException">When the <paramref name="propertyName" /> argument is invalid.</exception>
+    </member>
+    <member name="P:Microsoft.SmartDevice.Connectivity.Platform.Id">
+      <summary>Gets an ID that uniquely identifies this platform.</summary>
+      <returns>The unique identifier of the current platform.</returns>
+    </member>
+    <member name="P:Microsoft.SmartDevice.Connectivity.Platform.Name">
+      <summary>Gets the name of the platform.</summary>
+      <returns>The name of the platform.</returns>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.Platform.ToString">
+      <summary>Returns the <see cref="P:Microsoft.SmartDevice.Connectivity.Platform.Name" /> of the platform.</summary>
+      <returns>Returns the <see cref="P:Microsoft.SmartDevice.Connectivity.Platform.Name" /> of the platform.</returns>
+    </member>
+    <member name="T:Microsoft.SmartDevice.Connectivity.PlatformNotFoundException">
+      <summary>Thrown when the platform cannot be found.</summary>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.PlatformNotFoundException.#ctor">
+      <summary>Creates a new instance of the object that does not call the base constructor.</summary>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.PlatformNotFoundException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+      <summary>Creates a new instance of the object and sets <see cref="T:System.Runtime.Serialization.SerializationInfo" /> with information about the exception. </summary>
+      <param name="info">Contains contextual information about the source or destination.</param>
+      <param name="context">Holds the serialized object data about the thrown exception.</param>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.PlatformNotFoundException.#ctor(System.String)">
+      <summary>Creates a new instance of the object and passes arguments to the base class constructor.</summary>
+      <param name="message">The message that describes the error.</param>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.PlatformNotFoundException.#ctor(System.String,System.Exception)">
+      <summary>Creates a new instance of the object and passes arguments to the base class constructor.</summary>
+      <param name="message">The message that describes the error.</param>
+      <param name="innerException">The exception that is the cause of the current exception, or a null reference if no inner exception is specified.</param>
+    </member>
+    <member name="T:Microsoft.SmartDevice.Connectivity.ProcessorArchitectureType">
+      <summary>Indicates the device's processor architecture type. </summary>
+    </member>
+    <member name="F:Microsoft.SmartDevice.Connectivity.ProcessorArchitectureType.Intel">
+      <summary>Intel x86 architecture type.</summary>
+    </member>
+    <member name="F:Microsoft.SmartDevice.Connectivity.ProcessorArchitectureType.Mips">
+      <summary>Microprocessor without Interlocked Pipeline Stages (MIPS) architecture type.</summary>
+    </member>
+    <member name="F:Microsoft.SmartDevice.Connectivity.ProcessorArchitectureType.Alpha">
+      <summary>Alpha microprocessor architecture type originally developed by Digital Equipment Corp.</summary>
+    </member>
+    <member name="F:Microsoft.SmartDevice.Connectivity.ProcessorArchitectureType.PowerPC">
+      <summary>PowerPC microprocessor architecture type.</summary>
+    </member>
+    <member name="F:Microsoft.SmartDevice.Connectivity.ProcessorArchitectureType.ShX">
+      <summary>ShX microprocessor architecture type.</summary>
+    </member>
+    <member name="F:Microsoft.SmartDevice.Connectivity.ProcessorArchitectureType.Arm">
+      <summary>ARM microprocessor architecture type.</summary>
+    </member>
+    <member name="F:Microsoft.SmartDevice.Connectivity.ProcessorArchitectureType.Ia64">
+      <summary>IA64 microprocessor architecture type originally developed by Intel.</summary>
+    </member>
+    <member name="F:Microsoft.SmartDevice.Connectivity.ProcessorArchitectureType.Alpha64">
+      <summary>Alpha64 microprocessor architecture type.</summary>
+    </member>
+    <member name="F:Microsoft.SmartDevice.Connectivity.ProcessorArchitectureType.Unknown">
+      <summary>Unknown microprocessor architecture type.</summary>
+    </member>
+    <member name="T:Microsoft.SmartDevice.Connectivity.PropertyNotFoundException">
+      <summary>Represents all exceptions in scenarios where the property is not found.</summary>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.PropertyNotFoundException.#ctor">
+      <summary>Creates a new instance of the object and does not call the base constructor.</summary>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.PropertyNotFoundException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+      <summary>Creates a new instance of the object and sets <see cref="T:System.Runtime.Serialization.SerializationInfo" /> with information about the exception. </summary>
+      <param name="info">Contains contextual information about the source or destination.</param>
+      <param name="context">Holds the serialized object data about the thrown exception.</param>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.PropertyNotFoundException.#ctor(System.String)">
+      <summary>Creates a new instance of the object and passes arguments to the base class constructor.</summary>
+      <param name="message">The message that describes the error.</param>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.PropertyNotFoundException.#ctor(System.String,System.Exception)">
+      <summary>Creates a new instance of the object and passes arguments to the base class constructor.</summary>
+      <param name="message">The message that describes the error.</param>
+      <param name="innerException">The exception that is the cause of the current exception, or a null reference if no inner exception is specified.</param>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.PropertyNotFoundException.#ctor(System.String,System.String)">
+      <summary>Creates a new instance of the object and passes arguments to the base class constructor.</summary>
+      <param name="message">The message that describes the error.</param>
+      <param name="propertyName">The property name.</param>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.PropertyNotFoundException.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+      <summary>Sets the <see cref="T:System.Runtime.Serialization.SerializationInfo" /> with information about the exception.</summary>
+      <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that holds the serialized object data about the exception being thrown.</param>
+      <param name="context">The <see cref="T:System.Runtime.Serialization.StreamingContext" /> that contains contextual information about the source or destination.</param>
+    </member>
+    <member name="P:Microsoft.SmartDevice.Connectivity.PropertyNotFoundException.PropertyName">
+      <summary>Gets the name of the property.</summary>
+      <returns>The name of the property.</returns>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.PropertyNotFoundException.ToString">
+      <summary>Returns the type of the object.</summary>
+      <returns>Returns <see cref="T:Microsoft.SmartDevice.Connectivity.PropertyNotFoundException" />.</returns>
+    </member>
+    <member name="T:Microsoft.SmartDevice.Connectivity.RemoteAgent">
+      <summary>Used to deploy device agent applications to the device and exchange data between the desktop computer and the smart device. </summary>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.RemoteAgent.CreatePacketStream(Microsoft.SmartDevice.Connectivity.ObjectId)">
+      <summary>Creates a connection to the device agent to exchange data.</summary>
+      <returns>A <see cref="T:Microsoft.SmartDevice.Connectivity.DevicePacketStream" /> object that can transfer data between the device agent and the development computer.</returns>
+      <param name="serviceId">A unique service ID.</param>
+      <exception cref="T:Microsoft.SmartDevice.Connectivity.SmartDeviceException">Occurs if a COM exception is thrown by underlying COM components.</exception>
+      <exception cref="T:Microsoft.SmartDevice.Connectivity.DeviceNotConnectedException">Occurs if a device is not connected.</exception>
+    </member>
+    <member name="P:Microsoft.SmartDevice.Connectivity.RemoteAgent.Id">
+      <summary>Gets the Package ID of the remote agent.</summary>
+      <returns>The unique identifier of the package to be deployed as a remote agent.</returns>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.RemoteAgent.Start(System.String)">
+      <summary>Deploys the device agent to the device according to the commands in the package specified by <see cref="P:Microsoft.SmartDevice.Connectivity.RemoteAgent.Id" />.</summary>
+      <param name="arguments">Command-line arguments to be passed when starting the service.</param>
+      <exception cref="T:Microsoft.SmartDevice.Connectivity.SmartDeviceException">Occurs if a COM exception is thrown by underlying COM components</exception>
+      <exception cref="T:Microsoft.SmartDevice.Connectivity.DeviceNotConnectedException">Occurs if a device is not connected.</exception>
+    </member>
+    <member name="T:Microsoft.SmartDevice.Connectivity.RemoteProcess">
+      <summary>Represents a process on the device that can be started and stopped.</summary>
+    </member>
+    <member name="P:Microsoft.SmartDevice.Connectivity.RemoteProcess.Arguments">
+      <summary>Gets the arguments to be passed when starting a process.</summary>
+      <returns>The arguments of the current remote process.</returns>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.RemoteProcess.Close">
+      <summary>Closes the handle to free system resources on the device and disassociates the <see cref="T:Microsoft.SmartDevice.Connectivity.RemoteProcess" /> object with a remote executable by emptying the file name and arguments member variables.</summary>
+      <exception cref="T:Microsoft.SmartDevice.Connectivity.SmartDeviceException">An error occurred in the underlying COM components.</exception>
+      <exception cref="T:Microsoft.SmartDevice.Connectivity.DeviceNotConnectedException">The device is not connected.</exception>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.RemoteProcess.Equals(System.Object)">
+      <summary>Determines whether the specified object is equal to the current object.</summary>
+      <returns>Returns true if <paramref name="obj" /> points to the same object; otherwise false.</returns>
+      <param name="obj">The Object to compare with the current Object.</param>
+    </member>
+    <member name="P:Microsoft.SmartDevice.Connectivity.RemoteProcess.FileName">
+      <summary>Gets the file name.</summary>
+      <returns>The filename of the current remote process.</returns>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.RemoteProcess.GetExitCode">
+      <summary>Gets exit code of the process that has the same <see cref="P:Microsoft.SmartDevice.Connectivity.RemoteProcess.FileName" />.</summary>
+      <returns>Returns Int32 process exit code value.</returns>
+      <exception cref="T:System.InvalidOperationException">With a message string "Remote Process has not started", is thrown when the remote process has not started or "Remote Process has not exited" when remote process has not exited yet. </exception>
+      <exception cref="T:Microsoft.SmartDevice.Connectivity.SmartDeviceException">An error occurred in the underlying COM components.</exception>
+      <exception cref="T:Microsoft.SmartDevice.Connectivity.DeviceNotConnectedException">The device is not connected.</exception>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.RemoteProcess.GetHashCode">
+      <summary>Returns the hash code of this object.</summary>
+      <returns>The hash code of this object.</returns>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.RemoteProcess.GetId">
+      <summary>Gets the ID of the process that has the same <see cref="P:Microsoft.SmartDevice.Connectivity.RemoteProcess.FileName" /> property.</summary>
+      <returns>Returns Int32 process ID value.</returns>
+      <exception cref="T:System.InvalidOperationException">With a message string "Remote Process has not started", is thrown when the remote process has not started.</exception>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.RemoteProcess.HasExited">
+      <summary>Checks if the process with the same <see cref="P:Microsoft.SmartDevice.Connectivity.RemoteProcess.FileName" /> has exited.</summary>
+      <returns>Returns true if the process has exited; otherwise, false.</returns>
+      <exception cref="T:System.InvalidOperationException">With a message string "Remote Process has not started", is thrown when the remote process has not started or "Remote Process has not exited" when the remote process has not exited yet.</exception>
+      <exception cref="T:Microsoft.SmartDevice.Connectivity.SmartDeviceException">An error occurred in the underlying COM components.</exception>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.RemoteProcess.Kill">
+      <summary>Terminates a process that has the same <see cref="P:Microsoft.SmartDevice.Connectivity.RemoteProcess.FileName" /> property.</summary>
+      <exception cref="T:System.SystemException">Is thrown with a message “Remote Process has not started" if the remote process is not started when this API is invoked.</exception>
+      <exception cref="T:System.InvalidOperationException">The process either has not started or has already stopped.</exception>
+      <exception cref="T:Microsoft.SmartDevice.Connectivity.SmartDeviceException">An error occurred in the underlying COM components.</exception>
+      <exception cref="T:Microsoft.SmartDevice.Connectivity.DeviceNotConnectedException">The device is not connected.</exception>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.RemoteProcess.Start(System.String,System.String)">
+      <summary>Starts a new process on the device.</summary>
+      <returns>true if a new process is created; false if new process creation is not successful or if the process is already running.</returns>
+      <param name="fileName">Path of the executable on the device.</param>
+      <param name="arguments">Command-line parameters to be supplied to the executable.</param>
+      <exception cref="T:System.ArgumentNullException">One or more arguments are invalid.</exception>
+      <exception cref="T:Microsoft.SmartDevice.Connectivity.SmartDeviceException">An error occurred in the underlying COM components.</exception>
+      <exception cref="T:System.ArgumentException">The <see cref="P:Microsoft.SmartDevice.Connectivity.RemoteProcess.FileName" /> is not valid.</exception>
+      <exception cref="T:Microsoft.SmartDevice.Connectivity.DeviceNotConnectedException">The device is not connected.</exception>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.RemoteProcess.ToString">
+      <summary>Returns a <see cref="T:System.String" /> that contains the process identifier (PID) and filename of the current remote process.</summary>
+      <returns>A String that represents the current remote process.</returns>
+    </member>
+    <member name="T:Microsoft.SmartDevice.Connectivity.SmartDeviceException">
+      <summary>Covers the exception cases in unmanaged COM layer.</summary>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.SmartDeviceException.#ctor">
+      <summary>Creates a new instance of the object.</summary>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.SmartDeviceException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+      <summary>Creates a new instance of the object and sets <see cref="T:System.Runtime.Serialization.SerializationInfo" /> with information about the exception.</summary>
+      <param name="info">Contains contextual information about the source or destination.</param>
+      <param name="context">Holds the serialized object data about the thrown exception.</param>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.SmartDeviceException.#ctor(System.String)">
+      <summary>Creates a new instance of the object and passes arguments to the base class constructor.</summary>
+      <param name="message">The message that describes the error.</param>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.SmartDeviceException.#ctor(System.String,System.Exception)">
+      <summary>Creates a new instance of the object and passes arguments to the base class constructor.</summary>
+      <param name="message">The message that describes the error.</param>
+      <param name="innerException">The exception that is the cause of the current exception, or a null reference if no inner exception is specified.</param>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.SmartDeviceException.#ctor(System.String,System.Int32)">
+      <summary>Creates a new instance of the object and passes arguments to the base class constructor.</summary>
+      <param name="message">The message that describes the error.</param>
+      <param name="hresult">The coded numerical value that represents the type of exception or error.</param>
+    </member>
+    <member name="P:Microsoft.SmartDevice.Connectivity.SmartDeviceException.ErrorCode">
+      <summary>Gets the coded numerical value that represents the type of exception or error.</summary>
+      <returns>The value of the error code.</returns>
+    </member>
+    <member name="M:Microsoft.SmartDevice.Connectivity.SmartDeviceException.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+      <summary>Sets the <see cref="T:System.Runtime.Serialization.SerializationInfo" /> with information about the exception.</summary>
+      <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that holds the serialized object data about the exception being thrown.</param>
+      <param name="context">The <see cref="T:System.Runtime.Serialization.StreamingContext" /> that contains contextual information about the source or destination.</param>
+    </member>
+    <member name="T:Microsoft.SmartDevice.Connectivity.SystemInfo">
+      <summary>Stores device information such as CPU information, battery life, amount of memory, and operating system version.</summary>
+    </member>
+    <member name="P:Microsoft.SmartDevice.Connectivity.SystemInfo.ACLineStatus">
+      <summary>Gets or sets a byte that represents whether the device is plugged in.</summary>
+      <returns>AC power status. It is one of the following values: ValueDescription0Offline - Not plugged in1Online - Plugged in255Unknown statusAll other values are reserved.</returns>
+    </member>
+    <member name="P:Microsoft.SmartDevice.Connectivity.SystemInfo.AvailPageFile">
+      <summary>Gets or sets the maximum amount of memory the current process can commit, in bytes. This value should be smaller than the system-wide available commit. To calculate this value, call GetPerformanceInfo and subtract the value of CommitTotal from CommitLimit.</summary>
+      <returns>The maximum amount of memory the current process can commit, in bytes.</returns>
+    </member>
+    <member name="P:Microsoft.SmartDevice.Connectivity.SystemInfo.AvailPhys">
+      <summary>Gets or sets the amount of physical memory currently available in bytes.</summary>
+      <returns>The amount of physical memory currently available in bytes.</returns>
+    </member>
+    <member name="P:Microsoft.SmartDevice.Connectivity.SystemInfo.AvailVirtual">
+      <summary>Gets or sets the amount of unreserved and uncommitted memory currently in the user-mode part of the virtual address space of the calling process, in bytes. </summary>
+      <returns>The amount of unreserved and uncommitted memory currently in the user-mode part of the virtual address space of the calling process, in bytes.</returns>
+    </member>
+    <member name="P:Microsoft.SmartDevice.Connectivity.SystemInfo.BackupBatteryFlag">
+      <summary>Gets or sets a byte that represents the charge status of the backup battery.</summary>
+      <returns>Backup battery charge status. It can be a combination of the following values:ValueDescription1High2Low4Critical8Charging128No battery255Unknown statusAll other values are reserved.</returns>
+    </member>
+    <member name="P:Microsoft.SmartDevice.Connectivity.SystemInfo.BackupBatteryFullLifetime">
+      <summary>Gets or sets the number of seconds of backup battery life when at full charge, or 0xFFFFFFFF (BATTERY_LIFE_UNKNOWN) if full lifetime is unknown.</summary>
+      <returns>The number of seconds of backup battery life when at full charge, or 0xFFFFFFFF (BATTERY_LIFE_UNKNOWN) if full lifetime is unknown.</returns>
+    </member>
+    <member name="P:Microsoft.SmartDevice.Connectivity.SystemInfo.BackupBatteryLifePercent">
+      <summary>Gets or sets the percentage of full backup battery charge remaining. </summary>
+      <returns>The percentage of full backup battery charge remaining. This member can be a value in the range 0 to 100, or 255 if status is unknown. All other values are reserved.</returns>
+    </member>
+    <member name="P:Microsoft.SmartDevice.Connectivity.SystemInfo.BackupBatteryLifetime">
+      <summary>Gets or sets the number of seconds of backup battery life remaining, or 0xFFFFFFFF (BATTERY_LIFE_UNKNOWN) if remaining seconds are unknown.</summary>
+      <returns>The number of seconds of backup battery life remaining, or 0xFFFFFFFF (BATTERY_LIFE_UNKNOWN) if remaining seconds are unknown.</returns>
+    </member>
+    <member name="P:Microsoft.SmartDevice.Connectivity.SystemInfo.BatteryFlag">
+      <summary>Gets or sets a byte that represents the charge status of the battery.</summary>
+      <returns>Battery charge status. It can be a combination of the following values:ValueDescription1High2Low4Critical8Charging128No battery255Unknown statusAll other values are reserved.</returns>
+    </member>
+    <member name="P:Microsoft.SmartDevice.Connectivity.SystemInfo.BatteryFullLifetime">
+      <summary>Gets or sets the number of seconds of battery life when at full charge, or 0xFFFFFFFF (BATTERY_LIFE_UNKNOWN) if full lifetime is unknown.</summary>
+      <returns>The number of seconds of battery life when at full charge, or 0xFFFFFFFF (BATTERY_LIFE_UNKNOWN) if full lifetime is unknown.</returns>
+    </member>
+    <member name="P:Microsoft.SmartDevice.Connectivity.SystemInfo.BatteryLifePercent">
+      <summary>Gets or sets the percentage of full battery charge remaining. </summary>
+      <returns>The percentage of full battery charge remaining. This member can be a value in the range 0 to 100, or 255 if status is unknown. All other values are reserved.</returns>
+    </member>
+    <member name="P:Microsoft.SmartDevice.Connectivity.SystemInfo.BatteryLifetime">
+      <summary>Gets or sets the number of seconds of battery life remaining, or 0xFFFFFFFF (BATTERY_LIFE_UNKNOWN) if remaining seconds are unknown.</summary>
+      <returns>The number of seconds of battery life remaining, or 0xFFFFFFFF (BATTERY_LIFE_UNKNOWN) if remaining seconds are unknown.</returns>
+    </member>
+    <member name="P:Microsoft.SmartDevice.Connectivity.SystemInfo.CurrentTime">
+      <summary>Gets or sets the current time on the device based on a value in the operating system. </summary>
+      <returns>The current time on the device.</returns>
+    </member>
+    <member name="P:Microsoft.SmartDevice.Connectivity.SystemInfo.InstructionSet">
+      <summary>Gets or sets the instruction set type supported by the device's CPU.</summary>
+      <returns>The instruction set type supported by the device's CPU.</returns>
+    </member>
+    <member name="P:Microsoft.SmartDevice.Connectivity.SystemInfo.NumberOfProcessors">
+      <summary>Gets or sets the number of processors on the device.</summary>
+      <returns>The number of processors on the device.</returns>
+    </member>
+    <member name="P:Microsoft.SmartDevice.Connectivity.SystemInfo.OSBuildNo">
+      <summary>Gets or sets the build number of the operating system.</summary>
+      <returns>The build number of the device's operating system.</returns>
+    </member>
+    <member name="P:Microsoft.SmartDevice.Connectivity.SystemInfo.OSMajor">
+      <summary>Gets or sets the major version number of the operating system. For example, for Windows CE version 2.1, the major version number is 2.</summary>
+      <returns>The major version number of the device's operating system.</returns>
+    </member>
+    <member name="P:Microsoft.SmartDevice.Connectivity.SystemInfo.OSMinor">
+      <summary>Gets or sets the minor version number of the operating system. For example, for Windows CE version 2.1, the minor version number is 1. </summary>
+      <returns>The minor version number of the device's operating system.</returns>
+    </member>
+    <member name="P:Microsoft.SmartDevice.Connectivity.SystemInfo.PageSize">
+      <summary>Gets or sets an integer that represents the size in bytes of each page on the device.</summary>
+      <returns>The page size in bytes.</returns>
+    </member>
+    <member name="P:Microsoft.SmartDevice.Connectivity.SystemInfo.ProcessorArchitecture">
+      <summary>Gets or sets the processor architecture type of the device's CPU.</summary>
+      <returns>The processor architecture type of the device's CPU.</returns>
+    </member>
+    <member name="P:Microsoft.SmartDevice.Connectivity.SystemInfo.SystemDefaultLocaleId">
+      <summary>Gets or sets the locale ID of the device. </summary>
+      <returns>The locale ID of the device.</returns>
+    </member>
+    <member name="P:Microsoft.SmartDevice.Connectivity.SystemInfo.TotalPageFile">
+      <summary>Gets or sets the current size of the committed memory limit, in bytes.</summary>
+      <returns>The current size of the committed memory limit, in bytes.</returns>
+    </member>
+    <member name="P:Microsoft.SmartDevice.Connectivity.SystemInfo.TotalPhys">
+      <summary>Gets or sets the amount of physical memory, in bytes.</summary>
+      <returns>The amount of physical memory, in bytes.</returns>
+    </member>
+    <member name="P:Microsoft.SmartDevice.Connectivity.SystemInfo.TotalVirtual">
+      <summary>Gets or sets the size of the user-mode part of the virtual address space of the calling process, in bytes. </summary>
+      <returns>The size of the user-mode part of the virtual address space of the calling process, in bytes.</returns>
+    </member>
+  </members>
+</doc>

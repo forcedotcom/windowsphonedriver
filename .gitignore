@@ -1,0 +1,10 @@
+WindowsPhoneDriver.suo
+WindowsPhoneDriver.sln.cache
+*.user
+*.cache
+bin/
+obj/
+*.opensdf
+*.suo
+*.sdf
+ipch/
