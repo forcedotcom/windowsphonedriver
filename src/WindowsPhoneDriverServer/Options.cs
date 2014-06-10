@@ -292,6 +292,7 @@ namespace WindowsPhoneDriverServer
         {
             if (Environment.OSVersion.Platform == PlatformID.Win32NT)
             {
+                string operatingSystemDescription = string.Empty;
                 NativeMethods.OSVersionInfoEx versionInfo = new NativeMethods.OSVersionInfoEx();
                 versionInfo.dwOSVersionInfoSize = Marshal.SizeOf(versionInfo);
                 NativeMethods.GetVersionEx(ref versionInfo);
@@ -304,27 +305,27 @@ namespace WindowsPhoneDriverServer
                 {
                     if (versionInfo.dwMinorVersion == 1)
                     {
-                        this.operatingSystemVersion = "Windows XP";
+                        operatingSystemDescription = "Windows XP";
                     }
                     else if (versionInfo.dwMinorVersion == 2)
                     {
                         int isServerR2 = NativeMethods.GetSystemMetrics((int)NativeMethods.SystemMetrics.ServerR2);
                         if (versionType == NativeMethods.VersionNT.Workstation && architecture == NativeMethods.ProcessorArchitecture.AMD64)
                         {
-                            this.operatingSystemVersion = "Windows XP x64 Edition";
+                            operatingSystemDescription = "Windows XP x64 Edition";
                         }
                         else if (versionType != NativeMethods.VersionNT.Workstation && isServerR2 == 0)
                         {
-                            this.operatingSystemVersion = "Windows Server 2003";
+                            operatingSystemDescription = "Windows Server 2003";
                         }
                         else if (versionType == NativeMethods.VersionNT.Workstation && isServerR2 != 0)
                         {
-                            this.operatingSystemVersion = "Windows Server 2003 R2";
+                            operatingSystemDescription = "Windows Server 2003 R2";
                         }
                     }
                     else
                     {
-                        this.operatingSystemVersion = "Windows 2000";
+                        operatingSystemDescription = "Windows 2000";
                     }
                 }
                 else if (versionInfo.dwMajorVersion == 6)
@@ -333,48 +334,58 @@ namespace WindowsPhoneDriverServer
                     {
                         if (versionType == NativeMethods.VersionNT.Workstation)
                         {
-                            this.operatingSystemVersion = "Windows Vista";
+                            operatingSystemDescription = "Windows Vista";
                         }
                         else
                         {
-                            this.operatingSystemVersion = "Windows Server 2008";
+                            operatingSystemDescription = "Windows Server 2008";
                         }
                     }
                     else if (versionInfo.dwMinorVersion == 1)
                     {
                         if (versionType == NativeMethods.VersionNT.Workstation)
                         {
-                            this.operatingSystemVersion = "Windows 7";
+                            operatingSystemDescription = "Windows 7";
                         }
                         else
                         {
-                            this.operatingSystemVersion = "Windows Server 2008 R2";
+                            operatingSystemDescription = "Windows Server 2008 R2";
+                        }
+                    }
+                    else if (versionInfo.dwMinorVersion == 2)
+                    {
+                        if (versionType == NativeMethods.VersionNT.Workstation)
+                        {
+                            operatingSystemDescription = "Windows 8";
+                        }
+                        else
+                        {
+                            operatingSystemDescription = "Windows Server 2012";
                         }
                     }
                     else
                     {
                         if (versionType == NativeMethods.VersionNT.Workstation)
                         {
-                            this.operatingSystemVersion = "Windows 8";
+                            operatingSystemDescription = "Windows 8.1";
                         }
                         else
                         {
-                            this.operatingSystemVersion = "Windows Server 2012";
+                            operatingSystemDescription = "Windows Server 2012 R2";
                         }
                     }
                 }
                 else
                 {
-                    this.operatingSystemVersion = "Unsupported Windows NT version";
+                    operatingSystemDescription = "Unsupported Windows NT version";
                 }
 
                 if (Environment.OSVersion.ServicePack.Length > 0)
                 {
-                    this.operatingSystemVersion = this.operatingSystemVersion + " " + Environment.OSVersion.ServicePack;
+                    operatingSystemDescription += " " + Environment.OSVersion.ServicePack;
                 }
 
-                this.operatingSystemVersion += " " + string.Format(CultureInfo.InvariantCulture, "({0}.{1}.{2})", versionInfo.dwMajorVersion, versionInfo.dwMinorVersion, versionInfo.dwBuildNumber);
-                this.operatingSystemVersion += " " + architecture.ToString().ToLowerInvariant();
+                this.operatingSystemVersion = string.Format(CultureInfo.InvariantCulture, "{0} ({1}.{2}.{3}) {4}", operatingSystemDescription, versionInfo.dwMajorVersion, versionInfo.dwMinorVersion, versionInfo.dwBuildNumber, architecture.ToString().ToLowerInvariant());
             }
         }
 
