@@ -18,7 +18,7 @@ Requirements to Run the Windows Phone Driver
 --------------------------------------------
 * Windows 8 or higher
 * Microsoft .NET Framework 4.5
-* For use of the Windows Phone emulator, the [Windows Phone SDK](http://go.microsoft.com/fwlink/?LinkId=265772)
+* For use of the Windows Phone emulator, the [Windows Phone 8.1 SDK](https://dev.windowsphone.com/en-us/downloadsdk)
 is required.
 
 Using the Windows Phone Driver
@@ -38,11 +38,11 @@ Requirements to Develop the Windows Phone Driver
 ------------------------------------------------
 For development of the Windows Phone Driver, the following prerequisites are required, in addition to
 those required above for running the driver:
-* [Windows Phone SDK](http://go.microsoft.com/fwlink/?LinkId=265772)
+* [Windows Phone 8.1 SDK](https://dev.windowsphone.com/en-us/downloadsdk)
 * A clone of the [WebDriver project source tree](http://code.google.com/p/selenium/source/checkout)
 * Java Development Kit (for compilation of the WebDriver project)
 * Python (optional, for enhancing performance of compiling the WebDriver project)
-* Visual Studio 2012 or higher (Visual Studio 2013 recommended)
+* Visual Studio 2013 with Update 2 or higher
 * [StyleCop](https://stylecop.codeplex.com/), for enforcing consistent C# coding style
 
 Developing the Windows Phone Driver
@@ -51,9 +51,9 @@ The Windows Phone Driver is written in C#, as it requires a Windows Phone 8 appl
 not intended to run on the Mono framework.
 
 Code correctness is maintained by a combination of static code analysis and integration tests.
-Visual Studio 2012 includes static analysis tools that should be executed before committing
-code. A clone of the WebDriver project's .NET integration tests has been added into this project's 
-repository. They can be executed using the NUnit project found in the `lib` directory.
+Visual Studio 2013 includes static analysis tools that should be executed before committing
+code. Testing is accomplished by using the RemoteWebDriver tests in the Selenium project's
+.NET bindings.
 
 Consistent code style is maintained by use of StyleCop, which can be run as an add-in to Visual
 Studio, or can be run stand-alone. The correct StyleCop settings for each project in the Visual
@@ -61,7 +61,7 @@ Studio solution are checked into the project, and should not need modification.
 
 The Windows Phone Driver is dependent on the WebDriver project's JavaScript [Automation Atoms]
 (http://code.google.com/p/selenium/wiki/AutomationAtoms). From time to time, these will need to
-be refreshed. Refreshing these has been made pretty simple. From a Visual Studio 2012 Command
+be refreshed. Refreshing these has been made pretty simple. From a Visual Studio 2013 Command
 Prompt, in the root of the Windows Phone Driver project, you can execute the following command:
 
     support\updateatoms.cmd <full path to your clone of the WebDriver source code>
@@ -75,7 +75,7 @@ The Windows Phone Driver can be tested using the RemoteWebDriver tests in the We
 .NET bindings integration tests. To accomplish this, you will need to perform the following steps:
 
 1. Build the Windows Phone Driver project.
-2. From the bin\\[Debug|Release] directory, start `WindowsPhoneDriverServer.exe` with the following command:
+2. From the `bin\\[Debug|Release]` directory, start `WindowsPhoneDriverServer.exe` with the following command:
 `bin\[Debug|Release]\WindowsPhoneDriverServer.exe /port:6000 /urlpath:wd/hub`
 3. In your WebDriver project clone, make the following changes to the WebDriver.Remote.Tests.config file:
     * For the `add` element with the `key` attribute named `DriverName`, change the `value` attribute to `WindowsPhone`
