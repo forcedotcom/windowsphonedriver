@@ -30,6 +30,8 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Net.NetworkInformation;
+using System.Net.Sockets;
 using System.Text;
 using System.Xml.XPath;
 using Microsoft.SmartDevice.Connectivity;
@@ -58,7 +60,7 @@ namespace WindowsPhoneDriver
     public class DeviceController
     {
         private ControllerKind kind = ControllerKind.Emulator;
-        private string deviceName = "Emulator WVGA";
+        private string deviceName = "Emulator 8.1 WVGA 4 inch";
         private string address = string.Empty;
         private string port = string.Empty;
         private int displayScale = 100;
@@ -102,19 +104,21 @@ namespace WindowsPhoneDriver
         public event EventHandler<DeviceControllerConnectionStatusUpdatedEventArgs> ConnectionStatusUpdated;
 
         /// <summary>
-        /// Gets the IP of the address of the device being controlled.
+        /// Gets or sets the IP of the address of the device being controlled.
         /// </summary>
         public string Address
         {
             get { return this.address; }
+            set { this.address = value; }
         }
 
         /// <summary>
-        /// Gets the port of the device being controlled.
+        /// Gets or sets the port of the device being controlled.
         /// </summary>
         public string Port
         {
             get { return this.port; }
+            set { this.port = value; }
         }
 
         /// <summary>
@@ -211,6 +215,16 @@ namespace WindowsPhoneDriver
             this.SendStatusUpdate("Contents of network info file: \"{0}\"", networkInfo);
             string[] parts = networkInfo.Split(':');
             this.address = parts[0];
+            if (this.kind == ControllerKind.Emulator)
+            {
+                string localAddress = GetLocalIPAddress();
+                if (!string.IsNullOrEmpty(localAddress))
+                {
+                    this.SendStatusUpdate("Using emulator. Updating connection address to: \"{0}\"", localAddress);
+                    this.address = localAddress;
+                }
+            }
+
             this.port = parts[1];
             this.displayScale = int.Parse(parts[2], CultureInfo.InvariantCulture);
             this.hasSession = true;
@@ -263,6 +277,21 @@ namespace WindowsPhoneDriver
             return string.Empty;
         }
 
+        private static string GetLocalIPAddress()
+        {
+            NetworkInterface foundInterface = NetworkInterface.GetAllNetworkInterfaces().FirstOrDefault(i => i.NetworkInterfaceType == NetworkInterfaceType.Ethernet && !i.Name.ToUpperInvariant().Contains("SWITCH"));
+            if (foundInterface != null)
+            {
+                UnicastIPAddressInformation addressInfo = foundInterface.GetIPProperties().UnicastAddresses.FirstOrDefault(a => a.Address.AddressFamily == AddressFamily.InterNetwork);
+                if (addressInfo != null)
+                {
+                    return addressInfo.Address.ToString();
+                }
+            }
+
+            return string.Empty;
+        }
+
         private Device FindDevice()
         {
             DatastoreManager manager = new DatastoreManager(1033);
@@ -272,7 +301,7 @@ namespace WindowsPhoneDriver
                 throw new WindowsPhoneDriverException("Found no platforms");
             }
 
-            Platform platform = platforms.FirstOrDefault((p) => { return p.Name.StartsWith("Windows Phone ", StringComparison.OrdinalIgnoreCase); });
+            Platform platform = platforms.FirstOrDefault(p => p.Name.StartsWith("Windows Phone ", StringComparison.OrdinalIgnoreCase));
             this.SendStatusUpdate("Found platform {0}.", platform.Name);
             Collection<Device> devices = platform.GetDevices();
             if (devices.Count == 0)
@@ -281,7 +310,7 @@ namespace WindowsPhoneDriver
             }
 
             this.SendStatusUpdate("Searching for {1} device with name '{0}'.", this.deviceName, this.kind == ControllerKind.Emulator ? "emulated" : "physical");
-            Device device = devices.FirstOrDefault((d) => { return d.Name == this.deviceName && d.IsEmulator() == (this.kind == ControllerKind.Emulator); });
+            Device device = devices.FirstOrDefault(d => d.Name == this.deviceName && d.IsEmulator() == (this.kind == ControllerKind.Emulator));
             if (device != null)
             {
                 this.SendStatusUpdate("Found device {0}.", device.Name);
@@ -289,7 +318,7 @@ namespace WindowsPhoneDriver
             else
             {
                 this.SendStatusUpdate("No device found with name exactly matching '{0}'; looking for device with name contains '{0}'.", this.deviceName);
-                device = devices.FirstOrDefault((d) => { return d.Name.Contains(this.deviceName) && d.IsEmulator() == (this.kind == ControllerKind.Emulator); });
+                device = devices.FirstOrDefault(d => d.Name.Contains(this.deviceName) && d.IsEmulator() == (this.kind == ControllerKind.Emulator));
             }
 
             if (device == null)
@@ -318,7 +347,7 @@ namespace WindowsPhoneDriver
             {
                 // Need sleep here to allow application to launch.
                 System.Threading.Thread.Sleep(1000);
-                storage = this.browserApplication.GetIsolatedStore();
+                storage = this.browserApplication.GetIsolatedStore(null);
                 List<RemoteFileInfo> files = storage.GetDirectoryListing(string.Empty);
                 DateTime findTimeout = DateTime.Now.Add(TimeSpan.FromSeconds(15));
                 while (DateTime.Now < findTimeout)
@@ -338,7 +367,7 @@ namespace WindowsPhoneDriver
                     }
 
                     System.Threading.Thread.Sleep(500);
-                    storage = this.browserApplication.GetIsolatedStore();
+                    storage = this.browserApplication.GetIsolatedStore(null);
                     files = storage.GetDirectoryListing(string.Empty);
                 }
 

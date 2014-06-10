@@ -78,8 +78,12 @@ namespace TestApp
                 {
                     break;
                 }
-                else if (message == "start")
+                else if (message.StartsWith("start"))
                 {
+                    string[] values = message.Split(' ');
+                    string[] parts = values[1].Split(':');
+                    controller.Address = parts[0];
+                    controller.Port = parts[1];
                     message = "{ \"name\" : \"newSession\", \"parameters\" : {} }";
                     isStart = true;
                 }

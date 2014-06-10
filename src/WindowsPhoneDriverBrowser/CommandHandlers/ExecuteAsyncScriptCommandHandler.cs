@@ -79,7 +79,7 @@ namespace WindowsPhoneDriverBrowser.CommandHandlers
             {
                 try
                 {
-                    environment.Browser.InvokeScript("execScript", atom);
+                    environment.Browser.InvokeScript("eval", atom);
                 }
                 catch (Exception ex)
                 {

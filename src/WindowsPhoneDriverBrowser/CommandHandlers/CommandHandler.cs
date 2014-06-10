@@ -92,7 +92,7 @@ namespace WindowsPhoneDriverBrowser.CommandHandlers
                 {
                     try
                     {
-                        browser.InvokeScript("execScript", script);
+                        browser.InvokeScript("eval", script);
                         result = browser.InvokeScript("eval", "window.top.__wd_fn_result").ToString();
                     }
                     catch (Exception ex)
