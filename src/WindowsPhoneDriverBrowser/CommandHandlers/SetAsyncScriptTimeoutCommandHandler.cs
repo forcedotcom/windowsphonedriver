@@ -26,6 +26,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -51,7 +52,7 @@ namespace WindowsPhoneDriverBrowser.CommandHandlers
                 return Response.CreateMissingParametersResponse("ms");
             }
 
-            environment.AsyncScriptTimeout = Convert.ToInt32(value);
+            environment.AsyncScriptTimeout = Convert.ToInt32(value, CultureInfo.InvariantCulture);
 
             return Response.CreateSuccessResponse();
         }

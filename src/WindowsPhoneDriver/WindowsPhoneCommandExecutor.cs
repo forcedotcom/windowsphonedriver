@@ -26,6 +26,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -144,18 +145,19 @@ namespace WindowsPhoneDriver
             return this.SendMessage(this.controller.Address, this.controller.Port, serializedCommand);
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", Justification = "Application is not localized. String literals are expressly permitted.")]
         private string SendMessage(string address, string port, string message)
         {
             string receivedMessage = string.Empty;
             Console.WriteLine("Attempting to connect to {0}:{1}", address, port);
             using (Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
             {
-                socket.Connect(address, int.Parse(port));
+                socket.Connect(address, int.Parse(port, CultureInfo.InvariantCulture));
                 using (NetworkStream sendStream = new NetworkStream(socket, false))
                 {
                     int length = Encoding.UTF8.GetByteCount(message);
-                    string datagram = string.Format("{0}:{1}", length, message);
-                    this.log.Log(string.Format(">>> {0}", datagram));
+                    string datagram = string.Format(CultureInfo.InvariantCulture, "{0}:{1}", length, message);
+                    this.log.Log(string.Format(CultureInfo.InvariantCulture, ">>> {0}", datagram));
                     sendStream.Write(Encoding.UTF8.GetBytes(datagram), 0, Encoding.UTF8.GetByteCount(datagram));
                 }
 
@@ -179,8 +181,8 @@ namespace WindowsPhoneDriver
                         currentChar = Convert.ToChar(byteValue);
                     }
 
-                    int dataLength = int.Parse(dataLengthBuilder.ToString());
-                    this.log.Log(string.Format("Waiting to receive {0} bytes", dataLength));
+                    int dataLength = int.Parse(dataLengthBuilder.ToString(), CultureInfo.InvariantCulture);
+                    this.log.Log(string.Format(CultureInfo.InvariantCulture, "Waiting to receive {0} bytes", dataLength));
                     byte[] buffer = new byte[dataLength];
                     int received = 0;
                     while (received < dataLength)
@@ -189,7 +191,7 @@ namespace WindowsPhoneDriver
                     }
 
                     receivedMessage = Encoding.UTF8.GetString(buffer, 0, received);
-                    this.log.Log(string.Format("<<< {0}", receivedMessage));
+                    this.log.Log(string.Format(CultureInfo.InvariantCulture, "<<< {0}", receivedMessage));
                 }
             }
 

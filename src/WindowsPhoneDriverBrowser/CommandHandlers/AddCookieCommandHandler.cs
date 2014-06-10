@@ -26,6 +26,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -58,11 +59,11 @@ namespace WindowsPhoneDriverBrowser.CommandHandlers
             if (cookie != null)
             {
                 StringBuilder cookieBuilder = new StringBuilder();
-                cookieBuilder.AppendFormat("{0}={1}; ", cookie["name"], cookie["value"]);
+                cookieBuilder.AppendFormat(CultureInfo.InvariantCulture, "{0}={1}; ", cookie["name"], cookie["value"]);
 
                 if (cookie.ContainsKey("secure"))
                 {
-                    bool isSecure = Convert.ToBoolean(cookie["secure"]);
+                    bool isSecure = Convert.ToBoolean(cookie["secure"], CultureInfo.InvariantCulture);
                     if (isSecure)
                     {
                         cookieBuilder.Append("secure; ");
@@ -71,22 +72,22 @@ namespace WindowsPhoneDriverBrowser.CommandHandlers
 
                 if (cookie.ContainsKey("expiry"))
                 {
-                    double expirationOffset = Convert.ToDouble(cookie["expiry"]);
+                    double expirationOffset = Convert.ToDouble(cookie["expiry"], CultureInfo.InvariantCulture);
                     DateTime expires = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(expirationOffset);
-                    cookieBuilder.AppendFormat("expires={0:ddd, d MMM yyyy HH:mm:ss} GMT; ", expires);
+                    cookieBuilder.AppendFormat(CultureInfo.InvariantCulture, "expires={0:ddd, d MMM yyyy HH:mm:ss} GMT; ", expires);
                 }
 
                 if (cookie.ContainsKey("path"))
                 {
-                    cookieBuilder.AppendFormat("path={0}; ", cookie["path"].ToString());
+                    cookieBuilder.AppendFormat(CultureInfo.InvariantCulture, "path={0}; ", cookie["path"].ToString());
                 }
 
                 if (cookie.ContainsKey("domain"))
                 {
-                    cookieBuilder.AppendFormat("domain={0}; ", cookie["domain"].ToString());
+                    cookieBuilder.AppendFormat(CultureInfo.InvariantCulture, "domain={0}; ", cookie["domain"].ToString());
                 }
 
-                string result = this.EvaluateAtom(environment, "function() { document.cookie = '" + cookieBuilder.ToString() + "'; }");
+                this.EvaluateAtom(environment, "function() { document.cookie = '" + cookieBuilder.ToString() + "'; }");
             }
 
             return Response.CreateSuccessResponse();

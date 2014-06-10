@@ -26,6 +26,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -60,19 +61,19 @@ namespace WindowsPhoneDriverBrowser.CommandHandlers
             switch (timeoutType.ToString())
             {
                 case "implicit":
-                    environment.ImplicitWaitTimeout = Convert.ToInt32(value);
+                    environment.ImplicitWaitTimeout = Convert.ToInt32(value, CultureInfo.InvariantCulture);
                     break;
 
                 case "script":
-                    environment.AsyncScriptTimeout = Convert.ToInt32(value);
+                    environment.AsyncScriptTimeout = Convert.ToInt32(value, CultureInfo.InvariantCulture);
                     break;
 
                 case "page load":
-                    environment.PageLoadTimeout = Convert.ToInt32(value);
+                    environment.PageLoadTimeout = Convert.ToInt32(value, CultureInfo.InvariantCulture);
                     break;
 
                 default:
-                    return Response.CreateErrorResponse(WebDriverStatusCode.UnhandledError, string.Format("'{0}' is not a valid timeout type", timeoutType.ToString()));
+                    return Response.CreateErrorResponse(WebDriverStatusCode.UnhandledError, string.Format(CultureInfo.InvariantCulture, "'{0}' is not a valid timeout type", timeoutType.ToString()));
             }
 
             return Response.CreateSuccessResponse();

@@ -55,7 +55,7 @@ namespace WindowsPhoneDriverBrowser.CommandHandlers
             // before blindly scrolling. This is a hack, to be rectified in the
             // a future revision.
             string tagNameScript = "arguments[0].scrollIntoView(false);";
-            string scrollResult = this.EvaluateAtom(environment, WebDriverAtoms.ExecuteScript, tagNameScript, new object[] { element }, environment.CreateFrameObject());
+            this.EvaluateAtom(environment, WebDriverAtoms.ExecuteScript, tagNameScript, new object[] { element }, environment.CreateFrameObject());
 
             string result = this.EvaluateAtom(environment, WebDriverAtoms.GetTopLeftCoordinates, element, environment.CreateFrameObject());
             return Response.FromJson(result);

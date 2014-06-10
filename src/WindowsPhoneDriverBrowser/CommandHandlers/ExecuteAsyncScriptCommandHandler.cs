@@ -26,6 +26,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -48,6 +49,7 @@ namespace WindowsPhoneDriverBrowser.CommandHandlers
         /// <param name="environment">The <see cref="CommandEnvironment"/> to use in executing the command.</param>
         /// <param name="parameters">The <see cref="Dictionary{string, object}"/> containing the command parameters.</param>
         /// <returns>The JSON serialized string representing the command response.</returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Catching general exception type is expressly permitted here to allow proper reporting via JSON-serialized result.")]
         public override Response Execute(CommandEnvironment environment, Dictionary<string, object> parameters)
         {
             object script;
@@ -69,7 +71,7 @@ namespace WindowsPhoneDriverBrowser.CommandHandlers
             string argumentString = CreateArgumentString(argsArray);
 
             string callback = "function(result){window.top.__wd_fn_result = result;}";
-            argumentString = string.Format("{0}, {1}, {2}", argumentString, callback, JsonConvert.SerializeObject(environment.CreateFrameObject()));
+            argumentString = string.Format(CultureInfo.InvariantCulture, "{0}, {1}, {2}", argumentString, callback, JsonConvert.SerializeObject(environment.CreateFrameObject()));
 
             string atom = "window.top.__wd_fn_result = '';(" + WebDriverAtoms.ExecuteAsyncScript + ")(" + argumentString + ");";
             string result = string.Empty;
@@ -81,7 +83,7 @@ namespace WindowsPhoneDriverBrowser.CommandHandlers
                 }
                 catch (Exception ex)
                 {
-                    result = string.Format("{{ \"status\": {2}, \"value\": {{ \"message\": \"Unexpected exception ({0}) - '{1}'\" }} }}", ex.GetType().ToString(), ex.Message, WebDriverStatusCode.UnhandledError);
+                    result = string.Format(CultureInfo.InvariantCulture, "{{ \"status\": {2}, \"value\": {{ \"message\": \"Unexpected exception ({0}) - '{1}'\" }} }}", ex.GetType().ToString(), ex.Message, WebDriverStatusCode.UnhandledError);
                 }
             });
 
@@ -95,6 +97,7 @@ namespace WindowsPhoneDriverBrowser.CommandHandlers
             return Response.FromJson(result);
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Catching general exception type is expressly permitted here to allow proper reporting via JSON-serialized result.")]
         private string WaitForAsyncScriptResult(CommandEnvironment environment)
         {
             string result = string.Empty;
@@ -109,7 +112,7 @@ namespace WindowsPhoneDriverBrowser.CommandHandlers
                     }
                     catch (Exception ex)
                     {
-                        result = string.Format("{{ \"status\": {2}, \"value\": {{ \"message\": \"Unexpected exception ({0}) - '{1}'\" }} }}", ex.GetType().ToString(), ex.Message, WebDriverStatusCode.UnhandledError);
+                        result = string.Format(CultureInfo.InvariantCulture, "{{ \"status\": {2}, \"value\": {{ \"message\": \"Unexpected exception ({0}) - '{1}'\" }} }}", ex.GetType().ToString(), ex.Message, WebDriverStatusCode.UnhandledError);
                     }
                     finally
                     {

@@ -175,6 +175,7 @@ namespace WindowsPhoneDriver
         /// <summary>
         /// Starts the remote server listening for requests.
         /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", Justification = "Application is not localized. String literals are expressly permitted.")]
         public void StartListening()
         {
             try
@@ -299,6 +300,7 @@ namespace WindowsPhoneDriver
             return tableToReturn;
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", Justification = "Application is not localized. String literals are expressly permitted.")]
         private void OnClientConnect(IAsyncResult result)
         {
             try
@@ -379,6 +381,7 @@ namespace WindowsPhoneDriver
             }
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", Justification = "Application is not localized. String literals are expressly permitted.")]
         private ServerResponse DispatchRequest(Uri resourcePath, string httpMethod, string requestBody)
         {
             HttpStatusCode codeToReturn = HttpStatusCode.OK;

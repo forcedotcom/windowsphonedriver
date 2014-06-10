@@ -26,6 +26,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -77,7 +78,7 @@ function() {
             Uri targetUri = null;
             if (!Uri.TryCreate(url.ToString(), UriKind.Absolute, out targetUri))
             {
-                return Response.CreateErrorResponse(WebDriverStatusCode.UnhandledError, string.Format("Could not create valie URL from {0}", url.ToString()));
+                return Response.CreateErrorResponse(WebDriverStatusCode.UnhandledError, string.Format(CultureInfo.InvariantCulture, "Could not create valie URL from {0}", url.ToString()));
             }
 
             int timeoutInMilliseconds = environment.PageLoadTimeout;

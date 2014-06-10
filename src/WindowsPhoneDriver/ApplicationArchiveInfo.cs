@@ -1,4 +1,4 @@
-﻿// <copyright file="XapInfo.cs" company="Salesforce.com">
+﻿// <copyright file="ApplicationArchiveInfo.cs" company="Salesforce.com">
 //
 // Copyright (c) 2014 Salesforce.com, Inc.
 // All rights reserved.
@@ -38,9 +38,9 @@ namespace WindowsPhoneDriver
     /// <summary>
     /// Class that gives the information about a Windows Phone application bundle.
     /// </summary>
-    public class XapInfo
+    public class ApplicationArchiveInfo
     {
-        private XapInfo(string archiveFilePath)
+        private ApplicationArchiveInfo(string archiveFilePath)
         {
             this.ArchiveFilePath = archiveFilePath;
         }
@@ -85,10 +85,11 @@ namespace WindowsPhoneDriver
         /// Reads the application info.
         /// </summary>
         /// <param name="appArchiveFilePath">Path to the file of the application bundle.</param>
-        /// <returns>The <see cref="XapInfo"/> containing the information about the application.</returns>
-        public static XapInfo ReadApplicationInfo(string appArchiveFilePath)
+        /// <returns>The <see cref="ApplicationArchiveInfo"/> containing the information about the application.</returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "System.IO.Compression.ZipArchive automatically closes/disposes the underlying System.IO.FileStream.")]
+        public static ApplicationArchiveInfo ReadApplicationInfo(string appArchiveFilePath)
         {
-            XapInfo appInfo = new XapInfo(appArchiveFilePath);
+            ApplicationArchiveInfo appInfo = new ApplicationArchiveInfo(appArchiveFilePath);
             try
             {
                 // Do not use "using" for the FileStream. The ZipArchive will close/dispose the stream unless
@@ -135,6 +136,7 @@ namespace WindowsPhoneDriver
         /// Deletes a file from the application bundle.
         /// </summary>
         /// <param name="pathInArchive">The relative path of the file inside the application bundle.</param>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "System.IO.Compression.ZipArchive automatically closes/disposes the underlying System.IO.FileStream.")]
         public void DeleteFileFromApplicationArchive(string pathInArchive)
         {
             // Do not use "using" for the FileStream. The ZipArchive will close/dispose the stream unless
@@ -152,6 +154,7 @@ namespace WindowsPhoneDriver
         /// </summary>
         /// <param name="filePath">The file to insert into the application bundle.</param>
         /// <param name="pathInArchive">The relative path of the file inside the application bundle.</param>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "System.IO.Compression.ZipArchive automatically closes/disposes the underlying System.IO.FileStream.")]
         public void InsertFileIntoApplicationArchive(string filePath, string pathInArchive)
         {
             // Do not use "using" for the FileStream. The ZipArchive will close/dispose the stream unless
@@ -180,6 +183,7 @@ namespace WindowsPhoneDriver
         /// </summary>
         /// <param name="pathInArchive">The relative path of the file inside the application bundle.</param>
         /// <returns>The full path to the extracted file.</returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "System.IO.Compression.ZipArchive automatically closes/disposes the underlying System.IO.FileStream.")]
         public string ExtractFileFromApplicationArchive(string pathInArchive)
         {
             string result = string.Empty;

@@ -35,6 +35,7 @@ namespace WindowsPhoneDriverBrowser
     {
         private static AppResources _localizedResources = new AppResources();
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "File is generated via Visual Studio. No changes required.")]
         public AppResources LocalizedResources { get { return _localizedResources; } }
     }
 }

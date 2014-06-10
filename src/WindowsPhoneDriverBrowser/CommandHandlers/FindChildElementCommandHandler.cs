@@ -26,6 +26,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -81,7 +82,7 @@ namespace WindowsPhoneDriverBrowser.CommandHandlers
                 }
                 else if (response.Status != WebDriverStatusCode.NoSuchElement)
                 {
-                    if (mechanism.ToString().ToLowerInvariant() != "xpath" && response.Status == WebDriverStatusCode.InvalidSelector)
+                    if (mechanism.ToString().ToUpperInvariant() != "XPATH" && response.Status == WebDriverStatusCode.InvalidSelector)
                     {
                         continue;
                     }
@@ -92,7 +93,7 @@ namespace WindowsPhoneDriverBrowser.CommandHandlers
             }
             while (DateTime.Now < timeout);
 
-            string errorMessage = string.Format("No element found for {0} == '{1}'", mechanism.ToString(), criteria.ToString());
+            string errorMessage = string.Format(CultureInfo.InvariantCulture, "No element found for {0} == '{1}'", mechanism.ToString(), criteria.ToString());
             response = Response.CreateErrorResponse(WebDriverStatusCode.NoSuchElement, errorMessage);
             return response;
         }

@@ -121,7 +121,6 @@ namespace WindowsPhoneDriverBrowser.CommandHandlers
         /// <returns>The JSON serialized string representing the command response.</returns>
         public override Response Execute(CommandEnvironment environment, Dictionary<string, object> parameters)
         {
-            List<object> cookieList = new List<object>();
             CookieCollection cookies = null;
             ManualResetEvent synchronizer = new ManualResetEvent(false);
             environment.Browser.Dispatcher.BeginInvoke(() =>
@@ -140,7 +139,7 @@ namespace WindowsPhoneDriverBrowser.CommandHandlers
             {
                 foreach (Cookie currentCookie in cookies)
                 {
-                    string result = this.EvaluateAtom(environment, DeleteCookieScript, currentCookie.Name, environment.CreateFrameObject());
+                    this.EvaluateAtom(environment, DeleteCookieScript, currentCookie.Name, environment.CreateFrameObject());
                 }
             }
 

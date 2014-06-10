@@ -19,6 +19,7 @@
  */
 
 using System;
+using System.CodeDom.Compiler;
 using System.Globalization;
 using System.IO;
 using System.IO.IsolatedStorage;
@@ -32,6 +33,7 @@ namespace ToolStackPNGWriterLib
     /// <summary>
     /// WriteableBitmap Extensions for PNG Writing
     /// </summary>
+    [GeneratedCode("ToolStackPngLib", "1.0.0")]
     public static class PNGWriter
     {
         private const int MaxBlockSize = 0xFFFF;

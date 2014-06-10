@@ -288,6 +288,7 @@ namespace WindowsPhoneDriverServer
             }
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase", Justification = "Processor architecture should display in lower case.")]
         private void GetOSVersion()
         {
             if (Environment.OSVersion.Platform == PlatformID.Win32NT)

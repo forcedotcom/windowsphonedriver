@@ -26,6 +26,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -84,7 +85,7 @@ namespace WindowsPhoneDriverBrowser.CommandHandlers
                 Dictionary<string, object> valueAsDictionary = response.Value as Dictionary<string, object>;
                 if (valueAsDictionary == null)
                 {
-                    string errorMessage = string.Format("No frame found for criteria {0}", frameIdentifier.ToString());
+                    string errorMessage = string.Format(CultureInfo.InvariantCulture, "No frame found for criteria {0}", frameIdentifier.ToString());
                     response = Response.CreateErrorResponse(WebDriverStatusCode.NoSuchFrame, errorMessage);
                 }
                 else

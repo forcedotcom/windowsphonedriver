@@ -82,7 +82,7 @@ namespace WindowsPhoneDriverBrowser.CommandHandlers
                 }
                 else if (response.Status != WebDriverStatusCode.NoSuchElement)
                 {
-                    if (mechanism.ToString().ToLowerInvariant() != "xpath" && response.Status == WebDriverStatusCode.InvalidSelector)
+                    if (mechanism.ToString().ToUpperInvariant() != "XPATH" && response.Status == WebDriverStatusCode.InvalidSelector)
                     {
                         response.Status = WebDriverStatusCode.NoSuchElement;
                     }

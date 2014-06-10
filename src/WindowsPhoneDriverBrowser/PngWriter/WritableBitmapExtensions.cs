@@ -23,7 +23,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 
-namespace WindowsPhoneDriverBrowser.PngWriter
+namespace WindowsPhoneDriverBrowser
 {
     /// <summary>
     /// Contains extension methods for the <see cref="WritableBitmap"/> class.

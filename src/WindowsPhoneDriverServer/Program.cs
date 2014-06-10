@@ -55,6 +55,7 @@ namespace WindowsPhoneDriverServer
         /// The main entry point into the application.
         /// </summary>
         /// <param name="args">The set of arguments passed in on the command line.</param>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", Justification = "Application is not localized. String literals are expressly permitted.")]
         public static void Main(string[] args)
         {
             Options commandLineOptions = new Options(args);
@@ -123,6 +124,8 @@ namespace WindowsPhoneDriverServer
             }
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", Justification = "Application is not localized. String literals are expressly permitted.")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", Justification = "Method contains a number of command-line arguments which trigger spelling warnings.")]
         private static void PrintUsageMessage()
         {
             Console.WriteLine("Launches the WebDriver server for the Windows Phone driver");
@@ -157,6 +160,7 @@ namespace WindowsPhoneDriverServer
             throw new NotImplementedException("Configuration as node of a Grid hub is not yet implemented: " + hubLocation);
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", Justification = "Application is not localized. String literals are expressly permitted.")]
         private static void OnRemoteServerShutdownRequested(object sender, EventArgs e)
         {
             logger.Log("Remote server shutdown requested...", LogLevel.Info);
@@ -168,6 +172,7 @@ namespace WindowsPhoneDriverServer
             ShutdownServer();
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", Justification = "Application is not localized. String literals are expressly permitted.")]
         private static void Console_CancelKeyPress(object sender, ConsoleCancelEventArgs e)
         {
             logger.Log("Shutting down server...", LogLevel.Info);
@@ -181,6 +186,7 @@ namespace WindowsPhoneDriverServer
             continueRunning = false;
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", Justification = "Application is not localized. String literals are expressly permitted.")]
         private static void LogVersionDetails(Options commandLineOptions)
         {
             string serverVersion = commandLineOptions.ServerVersion;
@@ -190,6 +196,7 @@ namespace WindowsPhoneDriverServer
             logger.Log("OS version: " + operatingSystemVersion);
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", Justification = "Application is not localized. String literals are expressly permitted.")]
         private static bool CheckForUrlReservation(Options commandLineOptions)
         {
             bool urlReservationExists = true;
@@ -216,6 +223,7 @@ namespace WindowsPhoneDriverServer
             return urlReservationExists;
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", Justification = "Application is not localized. String literals are expressly permitted.")]
         private static bool ReserveUrl(string reservePath, bool isAdmin)
         {
             bool urlReserved = true;

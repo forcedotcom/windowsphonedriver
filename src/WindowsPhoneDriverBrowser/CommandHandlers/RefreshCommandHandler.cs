@@ -51,7 +51,7 @@ namespace WindowsPhoneDriverBrowser.CommandHandlers
             monitor.MonitorNavigation(() =>
             {
                 string refreshScript = "window.location.reload(true);";
-                string result = this.EvaluateAtom(environment, WebDriverAtoms.ExecuteScript, refreshScript, new object[] { }, environment.CreateFrameObject());
+                this.EvaluateAtom(environment, WebDriverAtoms.ExecuteScript, refreshScript, new object[] { }, environment.CreateFrameObject());
             });
 
             if (monitor.IsNavigationTimedOut)

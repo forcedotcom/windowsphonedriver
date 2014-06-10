@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO.IsolatedStorage;
 using System.Linq;
 using System.Net;
@@ -56,12 +57,30 @@ namespace WindowsPhoneDriverBrowser
             this.dispatcher.Start();
         }
 
+        private static string FormatMemoryValue(long valueInBytes)
+        {
+            string valueString = string.Empty;
+            if (valueInBytes >= 1024 * 1024)
+            {
+                double valueInMb = valueInBytes / (1024.0 * 1024.0);
+                valueString = string.Format(CultureInfo.InvariantCulture, "{0:F2} MB", valueInMb);
+            }
+            else
+            {
+                double valueInKb = valueInBytes / 1024.0;
+                valueString = string.Format(CultureInfo.InvariantCulture, "{0:F2} KB", valueInKb);
+            }
+
+            return valueString;
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", Justification = "Application is not localized. String literals are expressly permitted.")]
         private void DispatcherDataReceived(object sender, TextEventArgs e)
         {
             Deployment.Current.Dispatcher.BeginInvoke(() =>
             {
                 this.receivedData.Text = e.Text;
-                string memoryUsage = string.Format("Mem: {0}/{1}", FormatMemoryValue(DeviceStatus.ApplicationPeakMemoryUsage), FormatMemoryValue(DeviceStatus.ApplicationMemoryUsageLimit));
+                string memoryUsage = string.Format(CultureInfo.InvariantCulture, "Mem: {0}/{1}", FormatMemoryValue(DeviceStatus.ApplicationPeakMemoryUsage), FormatMemoryValue(DeviceStatus.ApplicationMemoryUsageLimit));
                 this.addressInfo.Text = memoryUsage;
             });
         }
@@ -72,23 +91,6 @@ namespace WindowsPhoneDriverBrowser
             {
                 this.addressInfo.Text = e.Text;
             });
-        }
-
-        private string FormatMemoryValue(long valueInBytes)
-        {
-            string valueString = string.Empty;
-            if (valueInBytes >= 1024 * 1024)
-            {
-                double valueInMb = valueInBytes / (1024.0 * 1024.0);
-                valueString = string.Format("{0:F2} MB", valueInMb);
-            }
-            else
-            {
-                double valueInKb = valueInBytes / 1024.0;
-                valueString = string.Format("{0:F2} KB", valueInKb);
-            }
-
-            return valueString;
         }
     }
 }

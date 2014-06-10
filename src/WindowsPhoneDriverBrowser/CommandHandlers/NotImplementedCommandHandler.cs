@@ -26,6 +26,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 
@@ -55,7 +56,7 @@ namespace WindowsPhoneDriverBrowser.CommandHandlers
         /// <returns>The JSON serialized string representing the command response.</returns>
         public override Response Execute(CommandEnvironment environment, Dictionary<string, object> parameters)
         {
-            string errorMessage = string.Format("Command '{0}' not implemented", this.commandName);
+            string errorMessage = string.Format(CultureInfo.InvariantCulture, "Command '{0}' not implemented", this.commandName);
             return Response.CreateErrorResponse(501, errorMessage);
         }
     }

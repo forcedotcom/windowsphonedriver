@@ -27,6 +27,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -146,14 +147,14 @@ namespace WindowsPhoneDriver
 
             if (device == null)
             {
-                throw new WindowsPhoneDriverException(string.Format("Found no matching devices for name '{0}'", this.deviceName));
+                throw new WindowsPhoneDriverException(string.Format(CultureInfo.InvariantCulture, "Found no matching devices for name '{0}'", this.deviceName));
             }
             else
             {
                 this.SendStatusUpdate("Connecting to device {0}.", device.Name);
                 string assemblyDirectory = Path.GetDirectoryName(this.GetType().Assembly.Location);
                 string xapPath = GetPackagePath(assemblyDirectory);
-                XapInfo appInfo = XapInfo.ReadApplicationInfo(xapPath);
+                ApplicationArchiveInfo appInfo = ApplicationArchiveInfo.ReadApplicationInfo(xapPath);
                 Guid applicationId = appInfo.ApplicationId.Value;
                 string iconPath = appInfo.ExtractIconFile();
 
@@ -211,7 +212,7 @@ namespace WindowsPhoneDriver
             string[] parts = networkInfo.Split(':');
             this.address = parts[0];
             this.port = parts[1];
-            this.displayScale = int.Parse(parts[2]);
+            this.displayScale = int.Parse(parts[2], CultureInfo.InvariantCulture);
             this.hasSession = true;
             File.Delete(localFile);
         }
@@ -271,7 +272,7 @@ namespace WindowsPhoneDriver
                 throw new WindowsPhoneDriverException("Found no platforms");
             }
 
-            Platform platform = platforms.FirstOrDefault((p) => { return p.Name.StartsWith("Windows Phone "); });
+            Platform platform = platforms.FirstOrDefault((p) => { return p.Name.StartsWith("Windows Phone ", StringComparison.OrdinalIgnoreCase); });
             this.SendStatusUpdate("Found platform {0}.", platform.Name);
             Collection<Device> devices = platform.GetDevices();
             if (devices.Count == 0)
@@ -358,7 +359,7 @@ namespace WindowsPhoneDriver
 
         private void SendStatusUpdate(string format, params object[] args)
         {
-            this.SendStatusUpdate(string.Format(format, args));
+            this.SendStatusUpdate(string.Format(CultureInfo.InvariantCulture, format, args));
         }
 
         private void SendStatusUpdate(string statusUpdate)

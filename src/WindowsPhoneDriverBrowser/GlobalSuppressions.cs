@@ -1,4 +1,4 @@
-﻿// <copyright file="ClickElementCommandHandler.cs" company="Salesforce.com">
+﻿// <copyright file="GlobalSuppressions.cs" company="Salesforce.com">
 //
 // Copyright (c) 2014 Salesforce.com, Inc.
 // All rights reserved.
@@ -24,41 +24,14 @@
 // USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 // </copyright>
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+// This file is used by Code Analysis to maintain SuppressMessage 
+// attributes that are applied to this project.
+// Project-level suppressions either have no target or are given 
+// a specific target and scoped to a namespace, type, member, etc.
+//
+// To add a suppression to this file, right-click the message in the 
+// Code Analysis results, point to "Suppress Message", and click 
+// "In Suppression File".
+// You do not need to add suppressions to this file manually.
 
-namespace WindowsPhoneDriverBrowser.CommandHandlers
-{
-    /// <summary>
-    /// Provides handling for the click element command.
-    /// </summary>
-    internal class ClickElementCommandHandler : CommandHandler
-    {
-        /// <summary>
-        /// Executes the command.
-        /// </summary>
-        /// <param name="environment">The <see cref="CommandEnvironment"/> to use in executing the command.</param>
-        /// <param name="parameters">The <see cref="Dictionary{string, object}"/> containing the command parameters.</param>
-        /// <returns>The JSON serialized string representing the command response.</returns>
-        public override Response Execute(CommandEnvironment environment, Dictionary<string, object> parameters)
-        {
-            object element;
-            if (!parameters.TryGetValue("ID", out element))
-            {
-                return Response.CreateMissingParametersResponse("ID");
-            }
-
-            this.SetAtomExecutionTimeout(TimeSpan.FromMilliseconds(100));
-            string result = this.EvaluateAtom(environment, WebDriverAtoms.Click, element, environment.CreateFrameObject());
-            if (string.IsNullOrEmpty(result))
-            {
-                return Response.CreateSuccessResponse();
-            }
-
-            return Response.FromJson(result);
-        }
-    }
-}
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA2210:AssembliesShouldHaveValidStrongNames", Justification = "Application is standalone, no need for strong-named assemblies.")]

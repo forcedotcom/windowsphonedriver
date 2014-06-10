@@ -40,7 +40,7 @@ namespace WindowsPhoneDriverBrowser
     {
         private int status;
         private string sessionId;
-        private object value;
+        private object responseValue;
 
         /// <summary>
         /// Gets or sets the status of the response.
@@ -69,8 +69,8 @@ namespace WindowsPhoneDriverBrowser
         [JsonConverter(typeof(ProtocolValueJsonConverter))]
         public object Value
         {
-            get { return this.value; }
-            set { this.value = value; }
+            get { return this.responseValue; }
+            set { this.responseValue = value; }
         }
 
         /// <summary>

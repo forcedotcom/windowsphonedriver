@@ -26,6 +26,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -41,15 +42,6 @@ namespace WindowsPhoneDriverBrowser.CommandHandlers
     internal abstract class CommandHandler
     {
         private TimeSpan atomExecutionTimeout = TimeSpan.FromMilliseconds(-1);
-
-        /// <summary>
-        /// Gets or sets the timeout for execution of an atom.
-        /// </summary>
-        protected TimeSpan AtomExecutionTimeout
-        {
-            get { return this.atomExecutionTimeout; }
-            set { this.atomExecutionTimeout = value; }
-        }
 
         /// <summary>
         /// Executes the command.
@@ -88,6 +80,7 @@ namespace WindowsPhoneDriverBrowser.CommandHandlers
         /// <param name="atom">The JavaScript atom to evaluate.</param>
         /// <param name="args">An array of arguments to the JavaScript atom.</param>
         /// <returns>The string result of the atom execution.</returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Catching general exception type is expressly permitted here to allow proper reporting via JSON-serialized result.")]
         protected string EvaluateAtom(CommandEnvironment environment, string atom, params object[] args)
         {
             WebBrowser browser = environment.Browser;
@@ -104,7 +97,7 @@ namespace WindowsPhoneDriverBrowser.CommandHandlers
                     }
                     catch (Exception ex)
                     {
-                        result = string.Format("{{ \"status\": {2}, \"value\": {{ \"message\": \"Unexpected exception ({0}) - '{1}'\" }} }}", ex.GetType().ToString(), ex.Message, WebDriverStatusCode.UnhandledError);
+                        result = string.Format(CultureInfo.InvariantCulture, "{{ \"status\": {2}, \"value\": {{ \"message\": \"Unexpected exception ({0}) - '{1}'\" }} }}", ex.GetType().ToString(), ex.Message, WebDriverStatusCode.UnhandledError);
                     }
                     finally
                     {
@@ -112,9 +105,18 @@ namespace WindowsPhoneDriverBrowser.CommandHandlers
                     }
                 });
 
-            bool receivedSignal = synchronizer.WaitOne(this.atomExecutionTimeout);
+            synchronizer.WaitOne(this.atomExecutionTimeout);
 
             return result;
+        }
+
+        /// <summary>
+        /// Sets the timeout for execution of an atom.
+        /// </summary>
+        /// <param name="timeout">The <see cref="TimeSpan"/> representing the timeout for the atom execution.</param>
+        protected void SetAtomExecutionTimeout(TimeSpan timeout)
+        {
+             this.atomExecutionTimeout = timeout;
         }
     }
 }

@@ -38,7 +38,6 @@ namespace WindowsPhoneDriverBrowser
     /// </summary>
     public sealed class CommandHandlerFactory
     {
-        private static object padlock = new object();
         private static CommandHandlerFactory factory;
 
         private Dictionary<string, CommandHandler> handlers = new Dictionary<string, CommandHandler>();
@@ -84,6 +83,7 @@ namespace WindowsPhoneDriverBrowser
             return new NotImplementedCommandHandler(commandName);
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling", Justification = "Factory method requires class coupling to avoid reflection")]
         private void PopulateCommandHandlers()
         {
             this.handlers.Add(DriverCommand.Status, new StatusCommandHandler());

@@ -26,6 +26,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -93,6 +94,7 @@ namespace WindowsPhoneDriverBrowser
         /// </summary>
         /// <param name="environment">The <see cref="CommandEnvironment"/> used as context for the command.</param>
         /// <returns>The <see cref="Response"/> from the command execution.</returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Catching general exception type is expressly permitted here to allow proper reporting via JSON-serialized result.")]
         public Response Execute(CommandEnvironment environment)
         {
             Response commandResponse = null;
@@ -102,7 +104,7 @@ namespace WindowsPhoneDriverBrowser
             }
             catch (Exception ex)
             {
-                string errorMessage = string.Format("Unexpected exception for command {0} [{1}]: {2}", this.commandName, ex.GetType().ToString(), ex.Message);
+                string errorMessage = string.Format(CultureInfo.InvariantCulture, "Unexpected exception for command {0} [{1}]: {2}", this.commandName, ex.GetType().ToString(), ex.Message);
                 commandResponse = Response.CreateErrorResponse(WebDriverStatusCode.UnhandledError, errorMessage);
             }
 

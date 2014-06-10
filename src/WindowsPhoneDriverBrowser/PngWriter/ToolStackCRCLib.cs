@@ -15,12 +15,14 @@
  */
 
 using System;
+using System.CodeDom.Compiler;
 
 namespace ToolStackCRCLib
 {
     /// <summary>
     /// Computes the CRC32 value for a given data set
     /// </summary>
+    [GeneratedCode("ToolStackPngLib", "1.0.0")]
     public class CRC32
     {
         private uint[] crcTable = {
@@ -216,6 +218,7 @@ namespace ToolStackCRCLib
     /// <summary>
     /// Computes the Adler32 CRC value for a given data set
     /// </summary>
+    [GeneratedCode("ToolStackPngLib", "1.0.0")]
     public class Adler32
     {
         private const int MOD_ADLER = 65521;

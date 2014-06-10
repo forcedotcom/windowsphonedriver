@@ -82,6 +82,7 @@ namespace WindowsPhoneDriverBrowser
         /// <summary>
         /// Gets or sets the keyboard state of the driver.
         /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", Justification = "Values are typed correctly for JSON serialization/deserialization.")]
         public Dictionary<string, object> KeyboardState
         {
             get { return this.keyboardState; }
@@ -91,6 +92,7 @@ namespace WindowsPhoneDriverBrowser
         /// <summary>
         /// Gets or sets the mouse state of the driver.
         /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", Justification = "Values are typed correctly for JSON serialization/deserialization.")]
         public Dictionary<string, object> MouseState
         {
             get { return this.mouseState; }
