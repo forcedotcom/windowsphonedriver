@@ -29,6 +29,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Management;
+using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -41,6 +42,9 @@ namespace TestApp
     {
         static void Main(string[] args)
         {
+            string localIPAddress = GetLocalIPAddress();
+            Console.WriteLine("Local IP Address: {0}", localIPAddress);
+
             RunRepl();
 
             Console.WriteLine("Completed. Press <Enter> to exit.");
@@ -545,6 +549,21 @@ namespace TestApp
             }
 
             return receivedMessage;
+        }
+
+        private static string GetLocalIPAddress()
+        {
+            NetworkInterface foundInterface = NetworkInterface.GetAllNetworkInterfaces().FirstOrDefault(i => i.NetworkInterfaceType == NetworkInterfaceType.Ethernet && !i.Name.ToLowerInvariant().Contains("switch"));
+            if (foundInterface != null)
+            {
+                UnicastIPAddressInformation addressInfo = foundInterface.GetIPProperties().UnicastAddresses.FirstOrDefault(a => a.Address.AddressFamily == AddressFamily.InterNetwork);
+                if (addressInfo != null)
+                {
+                    return addressInfo.Address.ToString();
+                }
+            }
+
+            return string.Empty;
         }
     }
 }
